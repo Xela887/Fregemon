@@ -1,10 +1,10 @@
 # ToDo-Liste:
-Attacken von Pokemon(Spieler) austauschbar machen
-Pokemon in dem Team hinzufügen/entfernen fixen - Starter kann nicht aus Team entfernt werden...  
-Kein Pokemon zweimal besitzen oder mehrfach besitzen fixen
-Pokemon wechseln
-Gegner balancen(Anzahl, Pokemonauswahl, Attacken)  
-Altar random Pokemon balancen(Auswahl, Attacken)  
-Entwickeln von Pokemon möglich machen  
-Speichern und laden(Spielername, Pokemon, Altarwerte, ...) in json  
-Effektivitäten (Funktion die zwei Typen nimmt und die Effektivität ausspukt  
+-Attacken von Pokemon(Spieler) austauschbar machen
+-Pokemon in dem Team hinzufügen/entfernen fixen - Starter kann nicht aus Team entfernt werden...  
+-Kein Pokemon zweimal besitzen oder mehrfach besitzen fixen
+-Pokemon wechseln
+-Gegner balancen(Anzahl, Pokemonauswahl, Attacken)  
+-Altar random Pokemon balancen(Auswahl, Attacken)  
+-Entwickeln von Pokemon möglich machen  
+-Speichern und laden(Spielername, Pokemon, Altarwerte, ...) in json  
+-Effektivitäten (Funktion die zwei Typen nimmt und die Effektivität ausspukt  
