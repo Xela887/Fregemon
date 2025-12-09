@@ -24,6 +24,10 @@ class Spieler(Trainer):
     def __init__(self, name, pokemonliste, active_pokemon, pokemon_team):
         super().__init__(name, pokemonliste, active_pokemon, pokemon_team)
 
+    def swap_pokemon(self, slot):
+        self.active_pokemon = self.pokemon_team[slot]
+
+
 class Enemy(Trainer):
     def __init__(self, name, pokemonliste, active_pokemon, pokemon_team):
         super().__init__(name, pokemonliste, active_pokemon, pokemon_team)
@@ -317,6 +321,7 @@ while running:
             # Kampf Pokemon wechseln
             elif menu_state == "swap_pokemon":
                 if pokemon1_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 1:
+                    battle.swap_pokemon_in_battle(1)
                     menu_state = "combat_menu"
                 elif pokemon2_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 2:
                     menu_state = "combat_menu"

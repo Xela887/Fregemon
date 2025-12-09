@@ -223,8 +223,10 @@ class Battle:
 
 
     def swap_pokemon_in_battle(self, slot):
-        if self.spieler_poke_team(slot).currentkp > 0:
+        if self.spieler_poke_team[slot].currentkp > 0:
             self.spieler_active_poke = self.spieler_poke_team[slot]
+            self.spieler_poke_team[slot] = self.spieler_poke_team[0]
+            self.spieler_poke_team[0] = self.spieler_active_poke
 
 
     # Spieler Pokemon Team resetten
