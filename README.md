@@ -1,8 +1,9 @@
 # ToDo-Liste:
 -Clean Code/Code sauber machen (pain)  
--Pokemon in dem Team hinzufügen/entfernen fixen - Starter kann nicht aus Team entfernt werden...  
+-Pokemon in dem Team hinzufügen/entfernen fixen  
+-Starter kann nicht aus Team entfernt werden fixen   
 -Kein Pokemon zweimal besitzen oder mehrfach besitzen fixen  
--Pokemon wechseln  
+-Pokemon wechseln (im Kampf)  
 -Gegner balancen(Anzahl, Pokemonauswahl, Attacken)  
 -Altar random Pokemon balancen(Auswahl, Attacken)  
 -Entwickeln von Pokemon möglich machen  
