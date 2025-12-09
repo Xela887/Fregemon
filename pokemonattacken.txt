@@ -1,0 +1,452 @@
+
+Pokémonattacken
+
+
+
+    Tpy Normal
+////////////////////////////////////////////
+Name        Kratzer
+Schaden     40
+Type        Normal
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Sternschauer
+Schaden     60
+Type        Normal
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Schallwelle
+Schaden     90
+Type        Normal
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Risikotackle
+Schaden     120
+Type        Normal
+Kategorie   Physisch
+////////////////////////////////////////////
+
+
+
+    Typ Kampf
+////////////////////////////////////////////
+Name        Ableithieb
+Schaden     75
+Type        Kampf
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Durchbruch
+Schaden     75
+Type        Kampf
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Fußtritt
+Schaden     65
+Type        Kampf
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Fokusstoß
+Schaden     120
+Type        Kampf
+Kategorie   Spezial
+////////////////////////////////////////////
+
+
+
+    Typ Flug
+////////////////////////////////////////////
+Name        Pflücker
+Schaden     60
+Type        Flug
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Orkan
+Schaden     110
+Type        Flug
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Fliegen
+Schaden     90
+Type        Flug
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Akrobatik
+Schaden     55
+Type        Flug
+Kategorie   Physisch
+////////////////////////////////////////////
+
+
+
+    Typ Gift
+////////////////////////////////////////////
+Name        Giftschock
+Schaden     65
+Type        Gift
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Matschbombe
+Schaden     90
+Type        Gift
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Giftzahn
+Schaden     50
+Type        Gift
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Schlammwoge
+Schaden     95
+Type        Gift
+Kategorie   Spezial
+////////////////////////////////////////////
+
+
+
+    Typ Boden
+////////////////////////////////////////////
+Name        Lehmschuss
+Schaden     50
+Type        Boden
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Dampfwalze
+Schaden     60
+Type        Boden
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Schaufler
+Schaden     80
+Type        Boden
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Erdbeben
+Schaden     100
+Type        Boden
+Kategorie   Physisch
+////////////////////////////////////////////
+
+
+
+    Typ Gestein
+////////////////////////////////////////////
+Name        Felsgrab
+Schaden     60
+Type        Gestein
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Steinhagel
+Schaden     75
+Type        Gestein
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Juwelenkraft
+Schaden     80
+Type        Gestein
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Steinkante
+Schaden     100
+Type        Gestein
+Kategorie   Physisch
+////////////////////////////////////////////
+
+
+
+    Typ Käfer
+////////////////////////////////////////////
+Name        Käfertrutz
+Schaden     50
+Type        Käfer
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Blutsauger
+Schaden     80
+Type        Käfer
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Kehrtwende
+Schaden     70
+Type        Käfer
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Pollenknödel
+Schaden     90
+Type        Käfer
+Kategorie   Spezial
+////////////////////////////////////////////
+
+
+
+    Typ Geist
+////////////////////////////////////////////
+Name        Phantomkraft
+Schaden     90
+Type        Geist
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Erstauner
+Schaden     30
+Type        Geist
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Spukball
+Schaden     80
+Type        Geist
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Unheilböen
+Schaden     60
+Type        Geist
+Kategorie   Spezial
+////////////////////////////////////////////
+
+
+
+    Typ Stahl
+////////////////////////////////////////////
+Name        Lichtkanone
+Schaden     80
+Type        Stahl
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Gigantenhieb
+Schaden     100
+Type        Stahl
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Eisenschädel
+Schaden     80
+Type        Stahl
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Tachyon-Schnitt
+Schaden     100
+Type        Stahl
+Kategorie   Spezial
+////////////////////////////////////////////
+
+
+
+    Typ Feuer
+////////////////////////////////////////////
+Name        Feuerzahn
+Schaden     65
+Type        Feuer
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Flammenwurf
+Schaden     90
+Type        Feuer
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Einäschern
+Schaden     60
+Type        Feuer
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Lohekanonade
+Schaden     150
+Type        Feuer
+Kategorie   Spezial
+////////////////////////////////////////////
+
+
+
+    Typ Wasser
+////////////////////////////////////////////
+Name        Wasserdüse
+Schaden     40
+Type        Wasser
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Kalte Dusche
+Schaden     50
+Type        Wasser
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Lehmbrühe
+Schaden     90
+Type        Wasser
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Surfer
+Schaden     90
+Type        Wasser
+Kategorie   Spezial
+////////////////////////////////////////////
+
+
+
+    Typ Pflanze
+////////////////////////////////////////////
+Name        Rasierblatt
+Schaden     55
+Type        Pflanze
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Blattwerk
+Schaden     40
+Type        Pflanze
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Gigasauger
+Schaden     75
+Type        Pflanze
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Strauchler
+Schaden     75
+Type        Pflanze
+Kategorie   Spezial
+////////////////////////////////////////////
+
+
+
+    Typ Elektro
+////////////////////////////////////////////
+Name        Ladestrahl
+Schaden     50
+Type        Elektro
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Ladungsstoß
+Schaden     80
+Type        Elektro
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Donnerschlag
+Schaden     75
+Type        Elektro
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Kreuzdonner
+Schaden     100
+Type        Elektro
+Kategorie   Physisch
+////////////////////////////////////////////
+
+
+
+    Typ Psycho
+////////////////////////////////////////////
+Name        Psychobeißer
+Schaden     85
+Type        Psycho
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Konfusion
+Schaden     50
+Type        Psycho
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Flächenmacht
+Schaden     80
+Type        Psycho
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Psychoschneide
+Schaden     80
+Type        Psycho
+Kategorie   Physisch
+////////////////////////////////////////////
+
+
+
+    Typ Eis
+////////////////////////////////////////////
+Name        Eissturm
+Schaden     55
+Type        Eis
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Eishammer
+Schaden     100
+Type        Eis
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Eisstrahl
+Schaden     90
+Type        Eis
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Blizzardlanze
+Schaden     130
+Type        Eis
+Kategorie   Physisch
+////////////////////////////////////////////
+
+
+
+    Typ Drache
+////////////////////////////////////////////
+Name        Wutanfall
+Schaden     120
+Type        Drache
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Drachenrute
+Schaden     60
+Type        Drache
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Raumschlag
+Schaden     100
+Type        Drache
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Schuppenrasseln
+Schaden     110
+Type        Drache
+Kategorie   Spezial
+////////////////////////////////////////////
+
+
+
+    Typ Unlicht
+////////////////////////////////////////////
+Name        Biss
+Schaden     60
+Type        Unlicht
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Kniefalltrick
+Schaden     80
+Type        Unlicht
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Klingenschwall
+Schaden     65
+Type        Unlicht
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Finsteraura
+Schaden     80
+Type        Unlicht
+Kategorie   Spezial
+////////////////////////////////////////////
+
+
+
+    Typ Fee
+////////////////////////////////////////////
+Name        Nebelexplosion
+Schaden     100
+Type        Fee
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Zauberschein
+Schaden     80
+Type        Fee
+Kategorie   Spezial
+////////////////////////////////////////////
+Name        Zauberturbo
+Schaden     100
+Type        Fee
+Kategorie   Physisch
+////////////////////////////////////////////
+Name        Knuddler
+Schaden     90
+Type        Fee
+Kategorie   Physisch
+////////////////////////////////////////////

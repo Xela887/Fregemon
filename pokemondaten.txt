@@ -1,0 +1,101 @@
+|  #  |Pokémon                      |Type 1   |Type 2   |KP     |ATK    |DEF    |SpATK  |SpDEF  |INIT   |
+|-----|-----------------------------|---------|---------|-------|-------|-------|-------|-------|-------|
+| 722 |Bauz                         |Pflanze  |Flug     |68     |55     |55     |50     |50     |42     |
+| 723 |Arboretoss                   |Pflanze  |Flug     |78     |75     |75     |70     |70     |52     |
+| 724 |Silvarro                     |Pflanze  |Geist    |78     |107    |75     |100    |100    |70     |
+| 725 |Flamiau                      |Feuer    |         |45     |65     |40     |60     |40     |70     |
+| 726 |Miezunder                    |Feuer    |         |65     |85     |50     |80     |50     |90     |
+| 727 |Fuegro                       |Feuer    |Unlicht  |95     |115    |90     |80     |90     |60     |
+| 728 |Robball                      |Wasser   |         |50     |54     |54     |66     |56     |40     |
+| 729 |Marikeck                     |Wasser   |         |60     |69     |69     |91     |81     |50     |
+| 730 |Primarene                    |Wasser   |Fee      |80     |74     |74     |126    |116    |60     |
+| 731 |Peppeck                      |Normal   |Flug     |35     |75     |30     |30     |30     |65     |
+| 732 |Trompeck                     |Normal   |Flug     |55     |85     |50     |40     |50     |75     |
+| 733 |Tukanon                      |Normal   |Flug     |80     |120    |75     |75     |75     |60     |
+| 734 |Mangunior                    |Normal   |         |48     |70     |30     |30     |30     |45     |
+| 735 |Manguspektor                 |Normal   |         |88     |110    |60     |55     |60     |45     |
+| 736 |Mabula                       |Käfer    |         |47     |62     |45     |55     |45     |46     |
+| 737 |Akkup                        |Käfer    |Elektro  |57     |82     |95     |55     |75     |36     |
+| 738 |Donarion                     |Käfer    |Elektro  |77     |70     |90     |145    |75     |43     |
+| 739 |Krabbox                      |Kampf    |         |47     |82     |57     |42     |47     |63     |
+| 740 |Krawell                      |Kampf    |Eis      |97     |132    |77     |62     |67     |43     |
+| 741 |Choreogel Flamenco-Stil      |Feuer    |Flug     |75     |70     |70     |98     |70     |93     |
+| 741 |Choreogel Cheerleading-Stil  |Feuer    |Flug     |75     |70     |70     |98     |70     |93     |
+| 741 |Choreogel Hula-Stil          |Psycho   |Flug     |75     |70     |70     |98     |70     |93     |
+| 741 |Choreogel Buyo-Stil          |Geist    |Flug     |75     |70     |70     |98     |70     |93     |
+| 742 |Wommel                       |Käfer    |Fee      |40     |45     |40     |55     |40     |84     |
+| 743 |Bandelby                     |Käfer    |Fee      |60     |55     |60     |95     |70     |124    |
+| 744 |Wuffels                      |Gestein  |         |45     |65     |40     |30     |40     |60     |
+| 745 |Wolwerock Tagform            |Gestein  |         |75     |115    |65     |55     |65     |112    |
+| 745 |Wolwerock Nachtform          |Gestein  |         |85     |115    |75     |55     |75     |82     |
+| 745 |Wolwerock Zwielichtform      |Gestein  |         |75     |117    |65     |55     |65     |110    |
+| 746 |Lusardin Schwarmform         |Wasser   |         |45     |140    |130    |140    |135    |30     |
+| 746 |Lusardin Einzelform          |Wasser   |         |45     |20     |20     |25     |25     |40     |
+| 747 |Garstella                    |Gift     |Wasser   |50     |53     |62     |43     |52     |45     |
+| 748 |Aggrostella                  |Gift     |Wasser   |50     |63     |152    |53     |142    |35     |
+| 749 |Pampuli                      |Boden    |         |70     |100    |70     |45     |70     |45     |
+| 750 |Pampross                     |Boden    |         |100    |125    |100    |55     |85     |35     |
+| 751 |Araqua                       |Wasser   |Käfer    |38     |40     |52     |40     |72     |27     |
+| 752 |Aranestro                    |Wasser   |Käfer    |68     |70     |92     |50     |132    |42     |
+| 753 |Imantis                      |Pflanze  |         |40     |55     |35     |50     |35     |35     |
+| 754 |Mantidea                     |Pflanze  |         |70     |105    |90     |80     |90     |45     |
+| 755 |Bubungus                     |Pflanze  |Fee      |50     |35     |55     |65     |75     |15     |
+| 756 |Lamellux                     |Pflanze  |Fee      |60     |75     |80     |90     |100    |30     |
+| 757 |Molunk                       |Gift     |Feuer    |48     |44     |40     |71     |40     |77     |
+| 758 |Amfira                       |Gift     |Feuer    |68     |64     |60     |111    |60     |117    |
+| 759 |Velursi                      |Normal   |Kampf    |70     |75     |50     |45     |50     |50     |
+| 760 |Kosturso                     |Normal   |Kampf    |120    |125    |80     |55     |60     |60     |
+| 761 |Frubberl                     |Pflanze  |         |42     |30     |38     |30     |38     |32     |
+| 762 |Frubaila                     |Pflanze  |         |52     |40     |48     |40     |48     |62     |
+| 763 |Fruyal                       |Pflanze  |         |72     |120    |98     |50     |98     |72     |
+| 764 |Curelei                      |Fee      |         |51     |52     |90     |82     |110    |100    |
+| 765 |Kommandutan                  |Normal   |Psycho   |90     |60     |80     |90     |110    |60     |
+| 766 |Quartermak                   |Kampf    |         |100    |120    |90     |40     |60     |80     |
+| 767 |Reißlaus                     |Käfer    |Wasser   |25     |25     |40     |20     |30     |80     |
+| 768 |Tectass                      |Käfer    |Wasser   |75     |125    |140    |60     |90     |40     |
+| 769 |Sankabuh                     |Geist    |Boden    |55     |55     |80     |70     |45     |15     |
+| 770 |Colossand                    |Geist    |Boden    |85     |75     |110    |100    |75     |35     |
+| 771 |Gufa                         |Wasser   |         |55     |60     |130    |30     |130    |5      |
+| 772 |Typ:Null                     |Normal   |         |95     |95     |95     |95     |95     |59     |
+| 773 |Amigento                     |Normal   |         |95     |95     |95     |95     |95     |95     |
+| 774 |Meteno Kernform              |Gestein  |Flug     |60     |100    |60     |100    |60     |120    |
+| 774 |Meteno Meteorform            |Gestein  |Flug     |60     |60     |100    |60     |100    |60     |
+| 775 |Koalelu                      |Normal   |         |65     |115    |65     |75     |95     |65     |
+| 776 |Tortunator                   |Feuer    |Drache   |60     |78     |135    |91     |85     |36     |
+| 777 |Togedemaru                   |Elektro  |Stahl    |65     |98     |63     |40     |73     |96     |
+| 778 |Mimigma                      |Geist    |Fee      |55     |90     |80     |50     |107    |96     |
+| 779 |Knirfish                     |Wasser   |Psycho   |68     |105    |70     |70     |70     |92     |
+| 780 |Sen-Long Mega                |Normal   |Drache   |78     |85     |110    |160    |116    |36     |
+| 780 |Sen-Long                     |Normal   |Drache   |78     |60     |85     |135    |91     |36     |
+| 781 |Moruda                       |Geist    |Pflanze  |70     |131    |100    |86     |90     |40     |
+| 782 |Miniras                      |Drache   |         |45     |55     |65     |45     |45     |45     |
+| 783 |Mediras                      |Drache   |Kampf    |55     |75     |90     |65     |75     |65     |
+| 784 |Grandiras                    |Drache   |Kampf    |75     |110    |125    |100    |105    |85     |
+| 785 |Kapu-Riki                    |Elektro  |Fee      |70     |115    |85     |95     |75     |130    |
+| 786 |Kapu-Fala                    |Psycho   |Fee      |70     |85     |75     |130    |115    |95     |
+| 787 |Kapu-Toro                    |Pflanze  |Fee      |70     |130    |115    |85     |95     |75     |
+| 788 |Kapu-Kime                    |Wasser   |Fee      |70     |75     |115    |95     |130    |85     |
+| 789 |Cosmog                       |Psycho   |         |43     |29     |31     |29     |31     |37     |
+| 790 |Cosmovum                     |Psycho   |         |43     |29     |131    |29     |131    |37     |
+| 791 |Solgaleo                     |Psycho   |Stahl    |137    |137    |107    |113    |89     |97     |
+| 792 |Lunala                       |Psycho   |Geist    |137    |113    |89     |137    |107    |97     |
+| 793 |Anego                        |Gestein  |Gift     |109    |53     |47     |127    |131    |103    |
+| 794 |Masskito                     |Käfer    |Kampf    |107    |139    |139    |53     |53     |79     |
+| 795 |Schabelle                    |Käfer    |Kampf    |71     |137    |37     |137    |37     |151    |
+| 796 |Voltirant                    |Elektro  |         |83     |89     |71     |173    |71     |83     |
+| 797 |Kaguron                      |Stahl    |Flug     |97     |101    |103    |107    |101    |61     |
+| 798 |Katagami                     |Pflanze  |Stahl    |59     |181    |131    |59     |31     |109    |
+| 799 |Schlingking                  |Unlicht  |Drache   |223    |101    |53     |97     |53     |43     |
+| 800 |Necrozma Ultra               |Psycho   |Drache   |97     |167    |97     |167    |97     |129    |
+| 800 |Necrozma Abendmähne          |Psycho   |Stahl    |97     |157    |127    |113    |109    |77     |
+| 800 |Necrozma Morgenschwingen     |Psycho   |Geist    |97     |113    |109    |157    |127    |77     |
+| 800 |Necrozma                     |Psycho   |         |97     |107    |101    |127    |89     |79     |
+| 801 |Magearna                     |Stahl    |Fee      |80     |95     |115    |130    |115    |65     |
+| 802 |Marshadow                    |Kampf    |Geist    |90     |125    |80     |90     |90     |125    |
+| 803 |Venicro                      |Gift     |         |67     |73     |67     |73     |67     |73     |
+| 804 |Agoyon                       |Gift     |Drache   |73     |73     |73     |127    |73     |121    |
+| 805 |Muramura                     |Gestein  |Stahl    |61     |131    |211    |53     |101    |13     |
+| 806 |Kopplosio                    |Feuer    |Geist    |53     |127    |53     |151    |79     |107    |
+| 807 |Zeraora                      |Elektro  |         |88     |112    |75     |102    |80     |143    |
+| 808 |Meltan                       |Stahl    |         |46     |65     |65     |55     |35     |34     |
+| 809 |Melmetal                     |Stahl    |         |135    |143    |143    |80     |65     |34     |
