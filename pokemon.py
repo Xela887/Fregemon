@@ -6,8 +6,6 @@ import random
 from Battle_Klasse import Battle
 
 
-# Klassen
-# Trainer
 class Trainer:
     def __init__(self, name, pokemonliste=None, active_pokemon=None, pokemon_team=[]):
         self.name = name
@@ -22,7 +20,6 @@ class Trainer:
         self.pokemonliste.append(pokemon)
         return
 
-# Spieler
 class Spieler(Trainer):
     def __init__(self, name, pokemonliste, active_pokemon, pokemon_team):
         super().__init__(name, pokemonliste, active_pokemon, pokemon_team)
@@ -31,13 +28,11 @@ class Spieler(Trainer):
         self.active_pokemon = self.pokemon_team[slot]
 
 
-# Klasse des Gegnerischen Trainer
 class Enemy(Trainer):
     def __init__(self, name, pokemonliste, active_pokemon, pokemon_team):
         super().__init__(name, pokemonliste, active_pokemon, pokemon_team)
 
 
-# Klasse für den Altar(best mechanic ever made), weil warum nicht für alles eine Klasse :)
 class Altar_For_Sacrifices:
     def __init__(self, pokemon_bodies, trainer_bodies, fp_amount):
         self.pokemon_bodies = pokemon_bodies
@@ -114,24 +109,19 @@ Attacken = [
 
 
 
-# Pygame initialisieren
 pygame.init()
 clock = pygame.time.Clock()
 
-# Bildschirmgröße abrufen
 screen_info = pygame.display.Info()
 screen_width = screen_info.current_w
 screen_height = screen_info.current_h
 
-# Fenstergröße
 window_width = int(screen_width * 1)
 window_height = int(screen_height * 1)
 
-# Fenster erstellen
 screen = pygame.display.set_mode((window_width, window_height), pygame.RESIZABLE)
 pygame.display.set_caption("Fregemon")
 
-# FARBEN
 BLACK = '#000000'
 WHITE = (255, 255, 255)
 GRAY = (100, 100, 100)
@@ -139,7 +129,6 @@ RED = (255, 0, 0)
 BLUE = (0, 192, 255)
 GREEN = (37, 196, 37)
 
-# Bilder laden und wenn nötig resizen
 front_bauz_img = pygame.image.load("pics/front_bauz_img.gif")
 front_bauz_img = pygame.transform.scale(front_bauz_img, (window_width * 0.1, window_height * 0.1))
 front_flamiau_img = pygame.image.load("pics/front_flamiau_img.gif")
@@ -149,11 +138,10 @@ front_robball_img = pygame.transform.scale(front_robball_img, (window_width * 0.
 pokemon_battlesprite = pygame.image.load("pics/pokemon_battlesprite.png")
 pokemon_battlesprite = pygame.transform.scale(pokemon_battlesprite, (window_width * 1, window_height * 1))
 
-# Schriftart
 font = pygame.font.SysFont(None, 60)
 small_font = pygame.font.SysFont(None, 40)
 
-# Button-Funktion
+
 def draw_button(text, x, y, w, h):
     rect = pygame.Rect(x, y, w, h)
     pygame.draw.rect(screen, WHITE, rect)
@@ -163,13 +151,13 @@ def draw_button(text, x, y, w, h):
     screen.blit(text_surf, text_rect)
     return rect
 
-# Text-Funktion
+
 def draw_text(text, x, y, color=(255, 255, 255)):
     surf = font.render(text, True, color)
     rect = surf.get_rect(center=(x, y))
     screen.blit(surf, rect)
 
-# Speichern-Funktion - unfertig
+# unfertig
 def save(name, pokemon):
     daten = {
         "pokemon": []
@@ -177,7 +165,7 @@ def save(name, pokemon):
 
     dateiname = f"{name}.json"
 
-# Random neue Attacke + filterbar
+
 def zufalls_attacke(typ = None, dmgtype = None):
     gefiltert = []
     for cls in Attacken:
@@ -190,7 +178,7 @@ def zufalls_attacke(typ = None, dmgtype = None):
 
     return random.choice(gefiltert)()
 
-# enemy_number = Anzahl der gegnerischen Pokemon
+
 def make_enemy_team(enemy_number):
     enemy_team = []
     for i in range(enemy_number):
@@ -199,12 +187,10 @@ def make_enemy_team(enemy_number):
     return enemy_team
 
 
-# Input Box für Spielername
 input_box = pygame.Rect(window_width * 0.35, window_height * 0.40, window_width * 0.30, window_height * 0.06)
 player_name = ""
 active_input = False
 
-# Menüstatus
 menu_state = "start_menu"
 
 selected_pokemon_name = None
@@ -214,19 +200,15 @@ battle_log_text = []
 view_pokemon_stats_button_list = []
 
 
-# Hauptschleife
 running = True
 while running:
-    clock.tick(20)  # 20 FPS
-    # Hintergrund füllen
+    clock.tick(20)
     screen.blit(pokemon_battlesprite, (window_width * 0, window_height * 0))
 
     for event in pygame.event.get():
-        # Prüfen ob Fenster Spiel geschlossen wurde
         if event.type == pygame.QUIT:
             running = False
 
-        # Prüfen ob linke Maustaste geklickt wurde
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = event.pos
 
@@ -290,7 +272,7 @@ while running:
                     menu_state = "view_pokemon"
                 elif altar_for_sacrifices_button.collidepoint(mouse_pos):
                     menu_state = "altar_for_sacrifices"
-                    continue    # ka ohne funktionierts nicht + wills nicht explainen
+                    continue
                 elif quit_button.collidepoint(mouse_pos):
                     running = False
 
@@ -364,7 +346,6 @@ while running:
                 elif view_pokemon_stats_button_list:
                     for poke_name, btn in view_pokemon_stats_button_list:
                         if btn.collidepoint(mouse_pos):
-                            # Pokémon-Objekt statt nur Name speichern!
                             selected_pokemon = next(p for p in spieler.pokemonliste if p.name == poke_name)
                             menu_state = "pokemon_stats"
 
@@ -372,21 +353,16 @@ while running:
             elif menu_state == "pokemon_stats":
                 if back_button.collidepoint(mouse_pos):
                     menu_state = "view_pokemon"
-                # Fügt Pokemon dem Team zu wenn Team nicht voll oder schon enthalten
                 if add_pokemon_to_team_button.collidepoint(mouse_pos):
                     if len(spieler.pokemon_team) < 6 and selected_pokemon not in spieler.pokemon_team:
                         spieler.pokemon_team.append(selected_pokemon)
                     else:
-                        # Aus dem Team entfernen
                         if selected_pokemon in spieler.pokemon_team:
                             spieler.pokemon_team.remove(selected_pokemon)
-                # Physische Attacke ansehen/wechseln
                 if physical_attack_button.collidepoint(mouse_pos):
                     menu_state = "view_physical_attack"
-                # Spezial Attacke ansehen/wechseln
                 if special_attack_button.collidepoint(mouse_pos):
                     menu_state = "view_special_attack"
-                # FFP in FP konvertieren
                 if add_fp_to_pokemon_button.collidepoint(mouse_pos):
                     if altar.fp_amount > 0:
                         altar.fp_amount -= 1
@@ -585,7 +561,7 @@ while running:
     elif menu_state == "combat_menu":
         fight_button = draw_button("Angreifen", window_width * 0.50, window_height * 0.80, window_width * 0.25, window_height * 0.20)
         swap_pokemon_button = draw_button("Pokemon", window_width * 0.75, window_height * 0.80, window_width * 0.25, window_height * 0.20)
-        # Kein richtiger Knopf, nur Text in einem Feld bzw. nur Feld oder Text
+
         what_do_you_do_text = draw_button("Was willst du machen?", window_width * 0.00, window_height * 0.80, window_width * 0.50, window_height * 0.20)
         # Textfeld von Spieler Pokemon
         ally_pokemon_text_field = draw_button("", window_width * 0.70, window_height * 0.60, window_width * 0.30, window_height * 0.15)
@@ -605,7 +581,7 @@ while running:
         attack1_button = draw_button("Physiche-Attacke", window_width * 0.50, window_height * 0.80, window_width * 0.25, window_height * 0.20)
         attack2_button = draw_button("Spezial-Attacke", window_width * 0.75, window_height * 0.80, window_width * 0.25, window_height * 0.20)
         changed_my_mind_button = draw_button("Zurück", window_width * 0.40, window_height * 0.80, window_width * 0.10, window_height * 0.20)
-        # Kein richtiger Knopf, nur Text in einem Feld
+
         what_do_you_do_text = draw_button("Welche Attacke?", window_width * 0.00, window_height * 0.80, window_width * 0.40, window_height * 0.20)
         # Textfeld von Spieler Pokemon
         ally_pokemon_text_field = draw_button("", window_width * 0.70, window_height * 0.60, window_width * 0.30, window_height * 0.15)
@@ -641,7 +617,7 @@ while running:
         pokemon4_button = draw_button("pokemon4", window_width * 0.75, window_height * 0.60, window_width * 0.25, window_height * 0.20)
         pokemon5_button = draw_button("pokemon5", window_width * 0.75, window_height * 0.40, window_width * 0.25, window_height * 0.20)
         changed_my_mind_button = draw_button("Zurück", window_width * 0.40, window_height * 0.80, window_width * 0.10, window_height * 0.20)
-        # Kein richtiger Knopf, nur Text in einem Feld
+
         what_do_you_do_text = draw_button("Welches Pokemon?", window_width * 0.00, window_height * 0.80, window_width * 0.40, window_height * 0.20)
 
     # Kampfübersicht
@@ -649,7 +625,6 @@ while running:
         title = font.render("Kampfübersicht", True, WHITE)
         screen.blit(title, (window_width // 2 - title.get_width() // 2, window_height * 0.2))
 
-        # Hintergrund-Feld
         pokemon_view_text_field = draw_button("", window_width * 0.30, window_height * 0.29, window_width * 0.40, window_height * 0.50)
 
         if log == "game_over_player":
@@ -694,7 +669,6 @@ while running:
 
         screen.blit(title, (window_width // 2 - title.get_width() // 2, window_height * 0.2))
 
-        # Hintergrund-Feld
         pokemon_view_text_field = draw_button("", window_width * 0.30, window_height * 0.29, window_width * 0.40, window_height * 0.55)
 
         # Echte Werte anzeigen
@@ -729,13 +703,10 @@ while running:
         pokemon_view_init_plus_button = draw_button("+", window_width * 0.63, window_height * 0.71, window_width * 0.02, window_height * 0.03)
         pokemon_view_init_minus_button = draw_button("-", window_width * 0.66, window_height * 0.71, window_width * 0.02, window_height * 0.03)
 
-        # Attacke Physisch
         physical_attack_button = draw_button(selected_pokemon.attacken[0].__class__.__name__, window_width * 0.32, window_height * 0.79, window_width * 0.16, window_height * 0.04)
 
-        # Attacke Spezial
         special_attack_button = draw_button(selected_pokemon.attacken[1].__class__.__name__,  window_width * 0.52, window_height * 0.79, window_width * 0.16, window_height * 0.04)
 
-        # Zum Team hinzufügen
         if selected_pokemon in spieler.pokemon_team:
             plusorminus = "-"
         elif selected_pokemon not in spieler.pokemon_team:
@@ -749,7 +720,6 @@ while running:
         title = font.render(selected_pokemon.attacken[0].__class__.__name__, True, WHITE)
         screen.blit(title, (window_width // 2 - title.get_width() // 2, window_height * 0.2))
 
-        # Hintergrund-Feld
         attack_view_text_field = draw_button("", window_width * 0.33, window_height * 0.29, window_width * 0.34, window_height * 0.45)
 
         draw_text(f"Schaden: {selected_pokemon.attacken[0].atkdmg}", window_width * 0.50, window_height * 0.37, BLACK)
@@ -766,10 +736,8 @@ while running:
         title = font.render("Neue Attacke wählen", True, WHITE)
         screen.blit(title, (window_width // 2 - title.get_width() // 2, window_height * 0.2))
 
-        # Buttons für neue Attacke erstellen
         alle_attacken = [cls() for cls in Attacken]
 
-        # Filtert Attacken nach dmgtyp, typ und schließt aktuelle Attacke aus
         gefilterte_attacken = []
         for attacke in alle_attacken:
             if (getattr(attacke, "dmgtype") == "physisch"
@@ -807,7 +775,6 @@ while running:
         title = font.render(selected_pokemon.attacken[1].__class__.__name__, True, WHITE)
         screen.blit(title, (window_width // 2 - title.get_width() // 2, window_height * 0.2))
 
-        # Hintergrund-Feld
         attack_view_text_field = draw_button("", window_width * 0.33, window_height * 0.29, window_width * 0.34, window_height * 0.45)
 
         draw_text(f"Schaden: {selected_pokemon.attacken[1].atkdmg}", window_width * 0.50, window_height * 0.37, BLACK)
@@ -824,10 +791,8 @@ while running:
         title = font.render("Neue Attacke wählen", True, WHITE)
         screen.blit(title, (window_width // 2 - title.get_width() // 2, window_height * 0.2))
 
-        # Buttons für neue Attacke erstellen
         alle_attacken = [cls() for cls in Attacken]
 
-        # Filtert Attacken nach dmgtyp, typ und schließt aktuelle Attacke aus
         gefilterte_attacken = []
         for attacke in alle_attacken:
             if (getattr(attacke, "dmgtype") == "spezial"
@@ -865,8 +830,8 @@ while running:
         title = font.render("Altar zum Opfern", True, WHITE)
         screen.blit(title, (window_width // 2 - title.get_width() // 2, window_height * 0.2))
 
-        # Kein richtiger Knopf, nur Text in einem Feld
         available_bodys_text_field = draw_button("", window_width * 0.35, window_height * 0.40, window_width * 0.30, window_height * 0.15)
+
         available_trainer_bodys_text = draw_text(f"Besiegte Trainer:{altar.trainer_bodies}", window_width * 0.50, window_height * 0.45, BLACK)
         available_pokemon_bodys_text = draw_text(f"Besiegte Pokemon:{altar.pokemon_bodies}", window_width * 0.50, window_height * 0.50, BLACK)
 
@@ -876,9 +841,7 @@ while running:
         back_button = draw_button("Zurück", window_width * 0.40, window_height * 0.73, window_width * 0.20, window_height * 0.06)
 
 
-    # Anzeige aktualisieren
     pygame.display.flip()
 
-# Pygame beenden
 pygame.quit()
 sys.exit()
