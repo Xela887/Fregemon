@@ -178,11 +178,18 @@ def zufalls_attacke(typ = None, dmgtype = None):
 
     return random.choice(gefiltert)()
 
+def filter_pokemon_by_level(all_pokemon):
+    filtered_list = []
+    for poke in all_pokemon:
+        if poke().level <= get_average_stat("level", "poketeam"):
+            filtered_list.append(poke)
+    return filtered_list
+
 def make_enemy_team(enemy_number):
     enemy_team = []
     for i in range(enemy_number):
-        pokemon = random.choice(all_pokemon)
-        enemy_team.append(pokemon(attacken=[zufalls_attacke(dmgtype="physisch"), zufalls_attacke(dmgtype="spezial")]))
+        pokemon = random.choice(filter_pokemon_by_level(all_pokemon))
+        enemy_team.append(pokemon(attacken=[zufalls_attacke(dmgtype="physisch", typ=getattr(pokemon(), "typ")[0]), zufalls_attacke(dmgtype="spezial", typ=getattr(pokemon(), "typ")[0])]))
     return enemy_team
 
 
@@ -294,7 +301,7 @@ while running:
                     menu_state = "main_menu"
                 elif accept_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 0:
                     menu_state = "combat_menu"
-                    enemy_team = make_enemy_team(2)
+                    enemy_team = make_enemy_team(len(spieler.pokemon_team))
                     enemy = Enemy(enemy_text, enemy_team, enemy_team[0], enemy_team)
                     battle = Battle(spieler.pokemon_team[0], spieler.pokemon_team, None, enemy.active_pokemon, enemy.pokemon_team, altar)
 
