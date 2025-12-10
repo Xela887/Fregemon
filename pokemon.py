@@ -324,12 +324,16 @@ while running:
                     battle.swap_pokemon_in_battle(1)
                     menu_state = "combat_menu"
                 elif pokemon2_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 2:
+                    battle.swap_pokemon_in_battle(2)
                     menu_state = "combat_menu"
                 elif pokemon3_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 3:
+                    battle.swap_pokemon_in_battle(3)
                     menu_state = "combat_menu"
                 elif pokemon4_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 4:
+                    battle.swap_pokemon_in_battle(4)
                     menu_state = "combat_menu"
                 elif pokemon5_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 5:
+                    battle.swap_pokemon_in_battle(5)
                     menu_state = "combat_menu"
                 elif changed_my_mind_button.collidepoint(mouse_pos):
                     menu_state = "combat_menu"
