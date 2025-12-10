@@ -49,9 +49,9 @@ class Altar_For_Sacrifices:
             self.trainer_bodies = 0
             while True:
                 new_pokemon = random.choice(all_pokemon)
-                if new_pokemon not in spieler.pokemonliste:
+                if new_pokemon not in spieler.pokemonliste and getattr(new_pokemon(), "level") <= get_average_stat("level", "pokelist"):
                     break
-            spieler.add_pokemon(new_pokemon(attacken=[zufalls_attacke(dmgtype="physisch"), zufalls_attacke(dmgtype="spezial")]))
+            spieler.add_pokemon(new_pokemon(attacken=[zufalls_attacke(dmgtype="physisch", typ=getattr(new_pokemon(), "typ")[0]), zufalls_attacke(dmgtype="spezial", typ=getattr(new_pokemon(), "typ")[0])]))
 
     def sacrifice_for_fp(self):
         if self.pokemon_bodies >= self.sac_for_fp_cost:
@@ -178,13 +178,25 @@ def zufalls_attacke(typ = None, dmgtype = None):
 
     return random.choice(gefiltert)()
 
-
 def make_enemy_team(enemy_number):
     enemy_team = []
     for i in range(enemy_number):
         pokemon = random.choice(all_pokemon)
         enemy_team.append(pokemon(attacken=[zufalls_attacke(dmgtype="physisch"), zufalls_attacke(dmgtype="spezial")]))
     return enemy_team
+
+
+def get_average_stat(stat, place):
+    count = 0
+    average_stat = 0
+    if place == "poketeam":
+        place = spieler.pokemon_team
+    elif place == "pokelist":
+        place = spieler.pokemonliste
+    for poke in place:
+        count += 1
+        average_stat += getattr(poke, stat)
+    return average_stat // count
 
 
 input_box = pygame.Rect(window_width * 0.35, window_height * 0.40, window_width * 0.30, window_height * 0.06)
