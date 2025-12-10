@@ -339,21 +339,26 @@ while running:
 
             # Kampf Pokemon wechseln
             elif menu_state == "swap_pokemon":
-                if pokemon1_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 1:
-                    battle.swap_pokemon_in_battle(1)
-                    menu_state = "combat_menu"
-                elif pokemon2_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 2:
-                    battle.swap_pokemon_in_battle(2)
-                    menu_state = "combat_menu"
-                elif pokemon3_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 3:
-                    battle.swap_pokemon_in_battle(3)
-                    menu_state = "combat_menu"
-                elif pokemon4_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 4:
-                    battle.swap_pokemon_in_battle(4)
-                    menu_state = "combat_menu"
-                elif pokemon5_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 5:
-                    battle.swap_pokemon_in_battle(5)
-                    menu_state = "combat_menu"
+                if len(battle.spieler_poke_team) > 1:
+                    if pokemon1_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 1:
+                        battle.swap_pokemon_in_battle(1)
+                        menu_state = "combat_menu"
+                if len(battle.spieler_poke_team) > 2:
+                    if pokemon2_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 2:
+                        battle.swap_pokemon_in_battle(2)
+                        menu_state = "combat_menu"
+                if len(battle.spieler_poke_team) > 3:
+                    if pokemon3_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 3:
+                        battle.swap_pokemon_in_battle(3)
+                        menu_state = "combat_menu"
+                if len(battle.spieler_poke_team) > 4:
+                    if pokemon4_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 4:
+                        battle.swap_pokemon_in_battle(4)
+                        menu_state = "combat_menu"
+                if len(battle.spieler_poke_team) > 5:
+                    if pokemon5_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 5:
+                        battle.swap_pokemon_in_battle(5)
+                        menu_state = "combat_menu"
                 elif changed_my_mind_button.collidepoint(mouse_pos):
                     menu_state = "combat_menu"
 
@@ -634,12 +639,18 @@ while running:
         pokemon_level_enemy_text = draw_text("Level:" + str(getattr(battle.enemy_active_poke, "level", None)), window_width * 0.05, window_height * 0.150, BLACK)
         pokemon_hp_enemy_text = draw_text(f"HP:{round(getattr(battle.enemy_active_poke, "currentkp", None), 2)}", window_width * 0.20, window_height * 0.125, RED)
         pokemon_ep_enemy_text = draw_text("EP:" + str(getattr(battle.enemy_active_poke, "ep", None)), window_width * 0.20, window_height * 0.175, BLUE)
-        # aktuelles Pokemon excluded
-        pokemon1_button = draw_button("pokemon1", window_width * 0.50, window_height * 0.80, window_width * 0.25, window_height * 0.20)
-        pokemon2_button = draw_button("pokemon2", window_width * 0.75, window_height * 0.80, window_width * 0.25, window_height * 0.20)
-        pokemon3_button = draw_button("pokemon3", window_width * 0.50, window_height * 0.60, window_width * 0.25, window_height * 0.20)
-        pokemon4_button = draw_button("pokemon4", window_width * 0.75, window_height * 0.60, window_width * 0.25, window_height * 0.20)
-        pokemon5_button = draw_button("pokemon5", window_width * 0.75, window_height * 0.40, window_width * 0.25, window_height * 0.20)
+
+        if len(battle.spieler_poke_team) > 1:
+            pokemon1_button = draw_button(battle.spieler_poke_team[1].__class__.__name__, window_width * 0.50, window_height * 0.80, window_width * 0.25, window_height * 0.20)
+        if len(battle.spieler_poke_team) > 2:
+            pokemon2_button = draw_button(battle.spieler_poke_team[2].__class__.__name__, window_width * 0.75, window_height * 0.80, window_width * 0.25, window_height * 0.20)
+        if len(battle.spieler_poke_team) > 3:
+            pokemon3_button = draw_button(battle.spieler_poke_team[3].__class__.__name__, window_width * 0.50, window_height * 0.60, window_width * 0.25, window_height * 0.20)
+        if len(battle.spieler_poke_team) > 4:
+            pokemon4_button = draw_button(battle.spieler_poke_team[4].__class__.__name__, window_width * 0.75, window_height * 0.60, window_width * 0.25, window_height * 0.20)
+        if len(battle.spieler_poke_team) > 5:
+            pokemon5_button = draw_button(battle.spieler_poke_team[5].__class__.__name__, window_width * 0.75, window_height * 0.40, window_width * 0.25, window_height * 0.20)
+
         changed_my_mind_button = draw_button("Zurück", window_width * 0.40, window_height * 0.80, window_width * 0.10, window_height * 0.20)
 
         what_do_you_do_text = draw_button("Welches Pokemon?", window_width * 0.00, window_height * 0.80, window_width * 0.40, window_height * 0.20)
