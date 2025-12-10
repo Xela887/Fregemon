@@ -3,7 +3,6 @@
 -Pokemon in dem Team hinzufügen/entfernen fixen  
 -Starter kann nicht aus Team entfernt werden fixen   
 -Kein Pokemon zweimal besitzen oder mehrfach besitzen fixen  
--Pokemon wechseln (im Kampf)  
 -Gegner balancen(Anzahl, Pokemonauswahl, Attacken)  
 -Altar random Pokemon balancen(Auswahl, Attacken)  
 -Entwickeln von Pokemon möglich machen  
