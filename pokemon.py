@@ -301,7 +301,7 @@ while running:
                     menu_state = "main_menu"
                 elif accept_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 0:
                     menu_state = "combat_menu"
-                    enemy_team = make_enemy_team(2)
+                    enemy_team = make_enemy_team(len(spieler.pokemon_team))
                     enemy = Enemy(enemy_text, enemy_team, enemy_team[0], enemy_team)
                     battle = Battle(spieler.pokemon_team[0], spieler.pokemon_team, None, enemy.active_pokemon, enemy.pokemon_team, altar)
 
