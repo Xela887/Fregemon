@@ -284,7 +284,7 @@ while running:
                     menu_state = "combat_menu"
                     enemy_team = make_enemy_team(2)
                     enemy = Enemy(enemy_text, enemy_team, enemy_team[0], enemy_team)
-                    battle = Battle(spieler.active_pokemon, spieler.pokemon_team, None, enemy.active_pokemon, enemy.pokemon_team, altar)
+                    battle = Battle(spieler.pokemon_team[0], spieler.pokemon_team, None, enemy.active_pokemon, enemy.pokemon_team, altar)
 
             # Kampf Aktion wählen
             elif menu_state == "combat_menu":
