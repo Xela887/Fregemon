@@ -4,6 +4,7 @@ from Angriff_Klassen import *
 from Pokemon_Klassen import *
 import random
 from Battle_Klasse import Battle
+import json
 
 
 class Trainer:
@@ -57,7 +58,7 @@ class Altar_For_Sacrifices:
         if self.pokemon_bodies >= self.sac_for_fp_cost:
             amount = self.pokemon_bodies // self.sac_for_fp_cost
             self.pokemon_bodies -= amount * self.sac_for_fp_cost
-            self.fp_amount = amount * self.sac_for_fp_amount
+            self.fp_amount += amount * self.sac_for_fp_amount
 
 
 # Alle Pokemon
@@ -175,13 +176,47 @@ def load_back_img(pokemon):
     back_img = pygame.transform.scale(back_img, (window_width * 0.2, window_height * 0.2))
     screen.blit(back_img, (window_width * 0.10, window_height * 0.55))
 
-# unfertig
-def save(name, pokemon):
-    daten = {
-        "pokemon": []
-    }
-
+def save(name, pokemonliste, altar):
+    if name == "":
+        name = "fregen"
     dateiname = f"{name}.json"
+
+    daten = {
+        "pokemon" : [],
+        "altar" : []
+    }
+    
+    for pokemon in pokemonliste:
+        daten["pokemon"].append({
+            "name" : pokemon.name,
+            "typ": pokemon.typ,
+            "level" : pokemon.level,
+            "maxkp" : pokemon.maxkp,
+            "atk" : pokemon.atk,
+            "defence" : pokemon.defence,
+            "spatk" : pokemon.spatk,
+            "spdef" : pokemon.spdef,
+            "init" : pokemon.init,
+            "currentkp" : pokemon.currentkp,
+            "attacke_physic" : pokemon.attacken[0].__class__.__name__,
+            "attacke_special": pokemon.attacken[1].__class__.__name__,
+            "fp" : pokemon.fp,
+            "front_img" : pokemon.front_img,
+            "back_img" : pokemon.back_img
+        })
+
+    daten["altar"].append({
+        "pokemon_bodies" : altar.pokemon_bodies,
+        "trainer_bodies" : altar.trainer_bodies,
+        "sacrifice_count" : altar.sacrifice_count,
+        "fp_amount" : altar.fp_amount
+    })
+
+    try:
+        with open(dateiname, "w", encoding="utf-8") as f:
+            json.dump(daten, f, indent=4, ensure_ascii=False)
+    except Exception as e:
+        print(f"Fehler beim Speichern: {e}")
 
 
 def zufalls_attacke(typ = None, dmgtype = None):
@@ -302,7 +337,7 @@ while running:
                 enemys = ["Team Fregen Rüpel", "Nick Fregen"]
                 enemy_text = random.choices(enemys, weights=[99, 1], k=1)[0]
                 if save_button.collidepoint(mouse_pos):
-                    print(f"Trainer: {player_name}")
+                    save(player_name, spieler.pokemonliste, altar)
                 elif start_combat_button.collidepoint(mouse_pos):
                     menu_state = "start_combat"
                 elif view_pokemon_button.collidepoint(mouse_pos):
