@@ -262,6 +262,9 @@ def get_average_stat(stat, place):
 input_box = pygame.Rect(window_width * 0.35, window_height * 0.40, window_width * 0.30, window_height * 0.06)
 player_name = ""
 active_input = False
+show_confirm_quit = False
+confirm_quit_button = None
+cancel_quit_button = None
 
 menu_state = "start_menu"
 
@@ -346,7 +349,11 @@ while running:
                     menu_state = "altar_for_sacrifices"
                     continue
                 elif quit_button.collidepoint(mouse_pos):
+                    show_confirm_quit = True
+                elif confirm_quit_button.collidepoint(mouse_pos):
                     running = False
+                elif cancel_quit_button.collidepoint(mouse_pos):
+                    show_confirm_quit = False
 
             # Kampf annehmen
             elif menu_state == "start_combat":
@@ -630,6 +637,11 @@ while running:
         altar_for_sacrifices_button = draw_button("Altar zum Opfern", window_width * 0.40, window_height * 0.60, window_width * 0.20, window_height * 0.06)
         save_button = draw_button("Speichern", window_width * 0.40, window_height * 0.70, window_width * 0.20, window_height * 0.06)
         quit_button = draw_button("Quit", window_width * 0.40, window_height * 0.80, window_width * 0.20, window_height * 0.05)
+        if show_confirm_quit == True:
+            draw_button("",  window_width * 0.35, window_height * 0.30, window_width * 0.30, window_height * 0.30)
+            draw_text("Hast du gespeichert?", window_width * 0.50, window_height * 0.33, BLACK)
+            confirm_quit_button = draw_button("Ja", window_width * 0.375, window_height * 0.36, window_width * 0.25, window_height * 0.04)
+            cancel_quit_button = draw_button("Oh nein!!!", window_width * 0.375, window_height * 0.41, window_width * 0.25, window_height * 0.14)
 
     # Kampf annehmen
     elif menu_state == "start_combat":
