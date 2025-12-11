@@ -1,4 +1,5 @@
 import random
+import Effektivitaet
 
 class Battle:
     def __init__(self, spieler_active_poke, spieler_poke_team, spieler_selected_move, enemy_active_poke, enemy_poke_team, altar):
@@ -15,13 +16,15 @@ class Battle:
         return round((attacker.level * 0.4 + 2)
                       * attacker.atk
                       * attacker.attacken[0].atkdmg
-                      / (10 * defender.defence), 2)
+                      / (10 * defender.defence)
+                      * Effektivitaet.get_effectiveness(attacker.attacken[0].typ, defender.typ[0]), 2)
 
     def __calc_damage_special(self, attacker, defender) -> float:
         return round((attacker.level * 0.4 + 2)
                       * attacker.spatk
                       * attacker.attacken[0].atkdmg
-                      / (10 * defender.spdef), 2)
+                      / (10 * defender.spdef)
+                      * Effektivitaet.get_effectiveness(attacker.attacken[1].typ, defender.typ[0]), 2)
 
     def __active_fainted(self, active_pokemon) -> bool:
         if active_pokemon.currentkp < 0:

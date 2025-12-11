@@ -1,0 +1,48 @@
+# Effektivitätstabelle als Dictionary
+effektivitaet = {
+    "Feuer":   {"Pflanze": 2, "Eis": 2, "Käfer": 2, "Stahl": 2,
+                "Feuer": 0.5, "Wasser": 0.5, "Gestein": 0.5, "Drache": 0.5},
+    "Wasser":  {"Feuer": 2, "Boden": 2, "Gestein": 2,
+                "Wasser": 0.5, "Pflanze": 0.5, "Drache": 0.5},
+    "Pflanze": {"Wasser": 2, "Boden": 2, "Gestein": 2,
+                "Feuer": 0.5, "Pflanze": 0.5, "Gift": 0.5, "Flug": 0.5,
+                "Käfer": 0.5, "Drache": 0.5, "Stahl": 0.5},
+    "Elektro": {"Wasser": 2, "Flug": 2,
+                "Elektro": 0.5, "Pflanze": 0.5, "Drache": 0.5,
+                "Boden": 0},
+    "Eis":     {"Pflanze": 2, "Boden": 2, "Flug": 2, "Drache": 2,
+                "Feuer": 0.5, "Wasser": 0.5, "Eis": 0.5, "Stahl": 0.5},
+    "Kampf":   {"Eis": 2, "Gestein": 2, "Normal": 2, "Unlicht": 2, "Stahl": 2,
+                "Gift": 0.5, "Flug": 0.5, "Psycho": 0.5, "Käfer": 0.5, "Fee": 0.5,
+                "Geist": 0},
+    "Gift":    {"Pflanze": 2, "Fee": 2,
+                "Gift": 0.5, "Boden": 0.5, "Gestein": 0.5, "Geist": 0.5,
+                "Stahl": 0},
+    "Boden":   {"Feuer": 2, "Elektro": 2, "Gift": 2, "Gestein": 2, "Stahl": 2,
+                "Pflanze": 0.5, "Käfer": 0.5, "Flug": 0},
+    "Flug":    {"Pflanze": 2, "Kampf": 2, "Käfer": 2,
+                "Elektro": 0.5, "Gestein": 0.5, "Stahl": 0.5},
+    "Psycho":  {"Kampf": 2, "Gift": 2,
+                "Psycho": 0.5, "Stahl": 0.5,
+                "Unlicht": 0},
+    "Käfer":   {"Pflanze": 2, "Psycho": 2, "Unlicht": 2,
+                "Feuer": 0.5, "Kampf": 0.5, "Gift": 0.5, "Flug": 0.5,
+                "Geist": 0.5, "Stahl": 0.5, "Fee": 0.5},
+    "Gestein": {"Feuer": 2, "Eis": 2, "Flug": 2, "Käfer": 2,
+                "Kampf": 0.5, "Boden": 0.5, "Stahl": 0.5},
+    "Geist":   {"Psycho": 2, "Geist": 2,
+                "Unlicht": 0.5, "Normal": 0},
+    "Drache":  {"Drache": 2,
+                "Stahl": 0.5, "Fee": 0},
+    "Unlicht": {"Psycho": 2, "Geist": 2,
+                "Kampf": 0.5, "Unlicht": 0.5, "Fee": 0.5},
+    "Stahl":   {"Eis": 2, "Gestein": 2, "Fee": 2,
+                "Feuer": 0.5, "Wasser": 0.5, "Elektro": 0.5, "Stahl": 0.5},
+    "Fee":     {"Kampf": 2, "Drache": 2, "Unlicht": 2,
+                "Feuer": 0.5, "Gift": 0.5, "Stahl": 0.5},
+    "Normal":  {"Gestein": 0.5, "Stahl": 0.5, "Geist": 0}
+}
+
+def get_effectiveness(angreifer_typ, verteidiger_typ):
+    return effektivitaet.get(angreifer_typ, {}).get(verteidiger_typ, 1)
+

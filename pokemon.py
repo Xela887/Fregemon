@@ -160,7 +160,6 @@ def draw_text(text, x, y, color=(255, 255, 255)):
 def load_front_img(pokemon):
     img = pokemon.front_img
     if img == None:
-        print("Kein front_img gefunden")
         return
     full_img = "pics/" + img + ".gif"
     front_img = pygame.image.load(full_img)
@@ -170,7 +169,6 @@ def load_front_img(pokemon):
 def load_back_img(pokemon):
     img = pokemon.back_img
     if img == None:
-        print("Kein back_img gefunden")
         return
     full_img = "pics/" + img + ".gif"
     back_img = pygame.image.load(full_img)
