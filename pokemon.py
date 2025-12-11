@@ -157,6 +157,26 @@ def draw_text(text, x, y, color=(255, 255, 255)):
     rect = surf.get_rect(center=(x, y))
     screen.blit(surf, rect)
 
+def load_front_img(pokemon):
+    img = pokemon.front_img
+    if img == None:
+        print("Kein front_img gefunden")
+        return
+    full_img = "pics/" + img + ".gif"
+    front_img = pygame.image.load(full_img)
+    front_img = pygame.transform.scale(front_img, (window_width * 0.2, window_height * 0.2))
+    screen.blit(front_img, (window_width * 0.70, window_height * 0.15))
+
+def load_back_img(pokemon):
+    img = pokemon.back_img
+    if img == None:
+        print("Kein back_img gefunden")
+        return
+    full_img = "pics/" + img + ".gif"
+    back_img = pygame.image.load(full_img)
+    back_img = pygame.transform.scale(back_img, (window_width * 0.2, window_height * 0.2))
+    screen.blit(back_img, (window_width * 0.10, window_height * 0.55))
+
 # unfertig
 def save(name, pokemon):
     daten = {
@@ -588,6 +608,9 @@ while running:
 
     # Kampf Aktion wählen
     elif menu_state == "combat_menu":
+        load_back_img(battle.spieler_active_poke)
+        load_front_img(battle.enemy_active_poke)
+
         fight_button = draw_button("Angreifen", window_width * 0.50, window_height * 0.80, window_width * 0.25, window_height * 0.20)
         swap_pokemon_button = draw_button("Pokemon", window_width * 0.75, window_height * 0.80, window_width * 0.25, window_height * 0.20)
 
@@ -607,6 +630,9 @@ while running:
 
     # Kampf Attacke wählen
     elif menu_state == "choose_attack":
+        load_back_img(battle.spieler_active_poke)
+        load_front_img(battle.enemy_active_poke)
+
         attack1_button = draw_button("Physiche-Attacke", window_width * 0.50, window_height * 0.80, window_width * 0.25, window_height * 0.20)
         attack2_button = draw_button("Spezial-Attacke", window_width * 0.75, window_height * 0.80, window_width * 0.25, window_height * 0.20)
         changed_my_mind_button = draw_button("Zurück", window_width * 0.40, window_height * 0.80, window_width * 0.10, window_height * 0.20)
@@ -627,6 +653,9 @@ while running:
 
     # Kampf Pokemon wechseln
     elif menu_state == "swap_pokemon":
+        load_back_img(battle.spieler_active_poke)
+        load_front_img(battle.enemy_active_poke)
+
         # Textfeld von Spieler Pokemon
         ally_pokemon_text_field = draw_button("", window_width * 0.70, window_height * 0.60, window_width * 0.30, window_height * 0.15)
         pokemon_name_ally_text = draw_text(getattr(battle.spieler_active_poke, "name", None), window_width * 0.85, window_height * 0.625, BLACK)
