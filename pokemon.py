@@ -55,7 +55,7 @@ class Altar_For_Sacrifices:
             roll_new = False
             while True:
                 for poke in spieler.pokemonliste:
-                    if new_pokemon().name == poke.name:
+                    if new_pokemon().name == poke.name and new_pokemon().level <= get_average_stat("level", pokelist):
                         roll_new = True
                 if roll_new == False:
                     break
