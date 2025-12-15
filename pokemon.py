@@ -1,14 +1,16 @@
 from Angriff_Klassen import *
 from Pokemon_Klassen import *
 from Battle_Klasse import Battle
+from Balancer_Klasse import Balancer
+from tkinter import filedialog
+import tkinter as tk
 import random
 import pygame
 import sys
 import json
 import os
-import tkinter as tk
-from tkinter import filedialog
 
+FPS = 20
 
 class Trainer:
     def __init__(self, name, pokemonliste=None, active_pokemon=None, pokemon_team=[]):
@@ -51,16 +53,16 @@ class Altar_For_Sacrifices:
         if self.pokemon_bodies >= 1 and self.trainer_bodies >= 1:
             self.pokemon_bodies = 0
             self.trainer_bodies = 0
-            new_pokemon = random.choice(all_pokemon)
+            new_pokemon = random.choice(filter_pokemon_by_level(all_pokemon))
             roll_new = False
             while True:
                 for poke in spieler.pokemonliste:
-                    if new_pokemon().name == poke.name and new_pokemon().level <= get_average_stat("level", pokelist):
+                    if new_pokemon().name == poke.name:
                         roll_new = True
                 if roll_new == False:
                     break
                 if roll_new == True:
-                    new_pokemon = random.choice(all_pokemon)
+                    new_pokemon = random.choice(filter_pokemon_by_level(all_pokemon))
                     roll_new = False
             spieler.add_pokemon(new_pokemon(attacken=[zufalls_attacke(dmgtype="physisch", typ=getattr(new_pokemon(), "typ")[0]), zufalls_attacke(dmgtype="spezial", typ=getattr(new_pokemon(), "typ")[0])]))
 
@@ -390,7 +392,7 @@ view_pokemon_stats_button_list = []
 
 running = True
 while running:
-    clock.tick(20)
+    clock.tick(FPS)
     screen.blit(pokemon_battlesprite, (window_width * 0, window_height * 0))
 
     for event in pygame.event.get():
@@ -477,6 +479,8 @@ while running:
                 elif accept_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 0:
                     menu_state = "combat_menu"
                     enemy_team = make_enemy_team(len(spieler.pokemon_team))
+                    balancer = Balancer(all_pokemon, spieler.pokemon_team)
+                    balanced_enemy_team = balancer.make_balanced_enemy_team(1)
                     enemy = Enemy(enemy_text, enemy_team, enemy_team[0], enemy_team)
                     battle = Battle(spieler.pokemon_team[0], spieler.pokemon_team, None, enemy.active_pokemon, enemy.pokemon_team, altar)
 
