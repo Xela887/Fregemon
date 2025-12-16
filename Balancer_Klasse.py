@@ -1,10 +1,11 @@
 import random
 
 class Balancer:
-    def __init__(self, all_pokemon, spieler_pokemon_team):
+    def __init__(self, all_pokemon, spieler_pokemon_team, attacken):
         self.all_pokemon = all_pokemon
         self.spieler_pokemon_team = spieler_pokemon_team
         self.balanced_enemy_team = []
+        self.attacken = attacken
 
 
     def make_balanced_enemy_team(self, amount_pokemon):
@@ -15,12 +16,20 @@ class Balancer:
     def make_balanced_enemy_pokemon(self):
         pokemon = self.get_random_pokemon()
         pokemon.level = self.get_average_stat("level") + self.get_random_level_adder()
-        pokemon.maxkp = self.get_average_stat("maxkp") + self.get_random_stat_adder()
+        if pokemon.level < 1:
+            pokemon.level = 1
+        pokemon.maxkp = self.get_average_stat("currentkp") + self.get_random_stat_adder()
         pokemon.atk = self.get_average_stat("atk") + self.get_random_stat_adder()
         pokemon.atk = self.get_average_stat("defence") + self.get_random_stat_adder()
         pokemon.atk = self.get_average_stat("spatk") + self.get_random_stat_adder()
         pokemon.atk = self.get_average_stat("spdef") + self.get_random_stat_adder()
         pokemon.atk = self.get_average_stat("init") + self.get_random_stat_adder()
+        if len(pokemon.typ) == 1:
+            pokemon.attacken.append(self.zufalls_attacke(typ=pokemon.typ[0], dmgtype="physisch"))
+            pokemon.attacken.append(self.zufalls_attacke(typ=pokemon.typ[0], dmgtype="spezial"))
+        if len(pokemon.typ) > 1:
+            pokemon.attacken.append(self.zufalls_attacke(typ=pokemon.typ[random.randint(0, len(pokemon.typ) - 1)], dmgtype="physisch"))
+            pokemon.attacken.append(self.zufalls_attacke(typ=pokemon.typ[random.randint(0, len(pokemon.typ) - 1)], dmgtype="spezial"))
         self.balanced_enemy_team.append(pokemon)
 
     def get_random_level_adder(self):
@@ -48,4 +57,16 @@ class Balancer:
 
     def get_random_pokemon(self):
         random_pokemon = random.choice(self.filter_pokemon_by_level())
-        return random_pokemon
+        return random_pokemon()
+
+    def zufalls_attacke(self, typ=None, dmgtype=None):
+        gefiltert = []
+        for cls in self.attacken:
+            instanz = cls()
+            if (typ is None or instanz.typ == typ) and (dmgtype is None or instanz.dmgtype == dmgtype):
+                gefiltert.append(cls)
+
+        if not gefiltert:
+            raise ValueError(f"Keine Attacke gefunden mit Typ={typ} und dmgtype={dmgtype}")
+
+        return random.choice(gefiltert)()

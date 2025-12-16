@@ -353,14 +353,6 @@ def filter_pokemon_by_level(all_pokemon):
             filtered_list.append(poke)
     return filtered_list
 
-def make_enemy_team(enemy_number):
-    enemy_team = []
-    for i in range(enemy_number):
-        pokemon = random.choice(filter_pokemon_by_level(all_pokemon))
-        enemy_team.append(pokemon(attacken=[zufalls_attacke(dmgtype="physisch", typ=getattr(pokemon(), "typ")[0]), zufalls_attacke(dmgtype="spezial", typ=getattr(pokemon(), "typ")[0])]))
-    return enemy_team
-
-
 def get_average_stat(stat, place):
     count = 0
     average_stat = 0
@@ -478,10 +470,9 @@ while running:
                     menu_state = "main_menu"
                 elif accept_button.collidepoint(mouse_pos) and len(spieler.pokemon_team) > 0:
                     menu_state = "combat_menu"
-                    enemy_team = make_enemy_team(len(spieler.pokemon_team))
-                    balancer = Balancer(all_pokemon, spieler.pokemon_team)
-                    balanced_enemy_team = balancer.make_balanced_enemy_team(1)
-                    enemy = Enemy(enemy_text, enemy_team, enemy_team[0], enemy_team)
+                    balancer = Balancer(all_pokemon, spieler.pokemon_team, Attacken)
+                    balanced_enemy_team = balancer.make_balanced_enemy_team(len(spieler.pokemon_team))
+                    enemy = Enemy(enemy_text, balanced_enemy_team, balanced_enemy_team[0], balanced_enemy_team)
                     battle = Battle(spieler.pokemon_team[0], spieler.pokemon_team, None, enemy.active_pokemon, enemy.pokemon_team, altar)
 
             # Kampf Aktion wählen
