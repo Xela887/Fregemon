@@ -52,7 +52,7 @@ class Bauz(Pokemon):
                  front_img="front_bauz_img",
                  back_img="back_bauz_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Arboretoss(Pokemon):
@@ -62,7 +62,7 @@ class Arboretoss(Pokemon):
                  front_img="front_arboretoss_img",
                  back_img="back_arboretoss_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Silvarro(Pokemon):
@@ -72,7 +72,7 @@ class Silvarro(Pokemon):
                  front_img="front_silvarro_img",
                  back_img="back_silvarro_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Flamiau(Pokemon):
@@ -82,7 +82,7 @@ class Flamiau(Pokemon):
                  front_img="front_flamiau_img",
                  back_img="back_flamiau_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Miezunder(Pokemon):
@@ -92,7 +92,7 @@ class Miezunder(Pokemon):
                  front_img="front_miezunder_img",
                  back_img="back_miezunder_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Fuegro(Pokemon):
@@ -102,7 +102,7 @@ class Fuegro(Pokemon):
                  front_img="front_fuegro_img",
                  back_img="back_fuegro_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Robball(Pokemon):
@@ -112,7 +112,7 @@ class Robball(Pokemon):
                  front_img="front_robball_img",
                  back_img="back_robball_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Marikeck(Pokemon):
@@ -122,7 +122,7 @@ class Marikeck(Pokemon):
                  front_img="front_marikeck_img",
                  back_img="back_marikeck_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Primarene(Pokemon):
@@ -132,7 +132,7 @@ class Primarene(Pokemon):
                  front_img="front_primarene_img",
                  back_img="back_primarene_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Peppeck(Pokemon):
@@ -142,7 +142,7 @@ class Peppeck(Pokemon):
                  front_img="front_peppeck_img",
                  back_img="back_peppeck_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Trompeck(Pokemon):
@@ -152,7 +152,7 @@ class Trompeck(Pokemon):
                  front_img="front_trompeck_img",
                  back_img="back_trompeck_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Tukanon(Pokemon):
@@ -162,7 +162,7 @@ class Tukanon(Pokemon):
                  front_img="front_tukanon_img",
                  back_img="back_tukanon_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Mangunior(Pokemon):
@@ -172,7 +172,7 @@ class Mangunior(Pokemon):
                  front_img="front_mangunior_img",
                  back_img="back_mangunior_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Manguspektor(Pokemon):
@@ -182,7 +182,7 @@ class Manguspektor(Pokemon):
                  front_img="front_manguspektor_img",
                  back_img="back_manguspektor_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Mabula(Pokemon):
@@ -192,7 +192,7 @@ class Mabula(Pokemon):
                  front_img="front_mabula_img",
                  back_img="back_mabula_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Akkup(Pokemon):
@@ -202,7 +202,7 @@ class Akkup(Pokemon):
                  front_img="front_akkup_img",
                  back_img="back_akupp_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Donarion(Pokemon):
@@ -212,7 +212,7 @@ class Donarion(Pokemon):
                  front_img="front_donarion_img",
                  back_img="back_donarion_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Krabbox(Pokemon):
@@ -222,7 +222,7 @@ class Krabbox(Pokemon):
                  front_img="front_krabbox_img",
                  back_img="back_krabbox_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Krawell(Pokemon):
@@ -232,7 +232,7 @@ class Krawell(Pokemon):
                  front_img="front_krawell_img",
                  back_img="back_krawell_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Wommel(Pokemon):
@@ -242,7 +242,7 @@ class Wommel(Pokemon):
                  front_img="front_wommel_img",
                  back_img="back_wommel_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Bandelby(Pokemon):
@@ -252,7 +252,7 @@ class Bandelby(Pokemon):
                  front_img="front_bandelby_img",
                  back_img="back_bandelby_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Garstella(Pokemon):
@@ -262,7 +262,7 @@ class Garstella(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Aggrostella(Pokemon):
@@ -272,7 +272,7 @@ class Aggrostella(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Pampuli(Pokemon):
@@ -282,7 +282,7 @@ class Pampuli(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Pampross(Pokemon):
@@ -292,7 +292,7 @@ class Pampross(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Araqua(Pokemon):
@@ -302,7 +302,7 @@ class Araqua(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Aranestro(Pokemon):
@@ -312,7 +312,7 @@ class Aranestro(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Imantis(Pokemon):
@@ -322,7 +322,7 @@ class Imantis(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Mantidea(Pokemon):
@@ -332,7 +332,7 @@ class Mantidea(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Bubungus(Pokemon):
@@ -342,7 +342,7 @@ class Bubungus(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Lamellux(Pokemon):
@@ -352,7 +352,7 @@ class Lamellux(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Molunk(Pokemon):
@@ -362,7 +362,7 @@ class Molunk(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Amfira(Pokemon):
@@ -372,7 +372,7 @@ class Amfira(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Velursi(Pokemon):
@@ -382,7 +382,7 @@ class Velursi(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Kosturso(Pokemon):
@@ -392,7 +392,7 @@ class Kosturso(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Frubberl(Pokemon):
@@ -402,7 +402,7 @@ class Frubberl(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Frubaila(Pokemon):
@@ -412,7 +412,7 @@ class Frubaila(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Fruyal(Pokemon):
@@ -422,7 +422,7 @@ class Fruyal(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Curelei(Pokemon):
@@ -432,7 +432,7 @@ class Curelei(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Kommandutan(Pokemon):
@@ -442,7 +442,7 @@ class Kommandutan(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Quartermak(Pokemon):
@@ -452,7 +452,7 @@ class Quartermak(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Reißlaus(Pokemon):
@@ -462,7 +462,7 @@ class Reißlaus(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Tectass(Pokemon):
@@ -472,7 +472,7 @@ class Tectass(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Sankabuh(Pokemon):
@@ -482,7 +482,7 @@ class Sankabuh(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Colossand(Pokemon):
@@ -492,7 +492,7 @@ class Colossand(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Gufa(Pokemon):
@@ -502,7 +502,7 @@ class Gufa(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Typ_Null(Pokemon):
@@ -512,7 +512,7 @@ class Typ_Null(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
 
 
 class Amigento(Pokemon):
@@ -522,4 +522,4 @@ class Amigento(Pokemon):
                  front_img=None,
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         level, currentkp, attacken, fp, front_img, back_img)
+                         attacken, level, currentkp, fp, front_img, back_img)
