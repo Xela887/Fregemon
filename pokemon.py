@@ -274,8 +274,8 @@ def load(Attacken):
 
     for p in daten.get("pokemon", []):
         pokemon = Pokemon(p["name"],
-                          p["maxkp"],
                           p["typ"],
+                          p["maxkp"],
                           p["atk"],
                           p["defence"],
                           p["spatk"],
@@ -451,7 +451,7 @@ while running:
                 enemys = ["Team Fregen Rüpel", "Nick Fregen"]
                 enemy_text = random.choices(enemys, weights=[99, 1], k=1)[0]
                 if save_button.collidepoint(mouse_pos):
-                    save(player_name, spieler.pokemonliste, altar, spieler.pokemon_team)
+                    save(spieler.name, spieler.pokemonliste, altar, spieler.pokemon_team)
                 elif start_combat_button.collidepoint(mouse_pos):
                     menu_state = "start_combat"
                 elif view_pokemon_button.collidepoint(mouse_pos):
