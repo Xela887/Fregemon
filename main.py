@@ -274,8 +274,8 @@ def load(Attacken):
 
     for p in daten.get("pokemon", []):
         pokemon = Pokemon(p["name"],
-                          p["maxkp"],
                           p["typ"],
+                          p["maxkp"],
                           p["atk"],
                           p["defence"],
                           p["spatk"],
@@ -407,7 +407,10 @@ while running:
                     menu_state = "new_player"
                 elif load_game_button.collidepoint(mouse_pos):
                     spieler, altar = load(Attacken)
-                    menu_state = "main_menu"
+                    if spieler == [] and altar == []:
+                        menu_state = "game_selection"
+                    else:
+                        menu_state = "main_menu"
                 elif back_button.collidepoint(mouse_pos):
                     menu_state = "start_menu"
 
@@ -448,7 +451,7 @@ while running:
                 enemys = ["Team Fregen Rüpel", "Nick Fregen"]
                 enemy_text = random.choices(enemys, weights=[99, 1], k=1)[0]
                 if save_button.collidepoint(mouse_pos):
-                    save(player_name, spieler.pokemonliste, altar, spieler.pokemon_team)
+                    save(spieler.name, spieler.pokemonliste, altar, spieler.pokemon_team)
                 elif start_combat_button.collidepoint(mouse_pos):
                     menu_state = "start_combat"
                 elif view_pokemon_button.collidepoint(mouse_pos):
@@ -488,20 +491,16 @@ while running:
                     menu_state = "combat_menu"
                     log = battle.player_attack_physic()
                     if log == "game_over_player":
-                        print("Gegner hat gewonnen")
                         menu_state = "fight_overview"
                     elif log == "game_over_enemy":
-                        print("Spieler hat gewonnen")
                         menu_state = "fight_overview"
                         altar.trainer_bodies += 1
                 elif attack2_button.collidepoint(mouse_pos):
                     menu_state = "combat_menu"
                     log = battle.player_attack_special()
                     if log == "game_over_player":
-                        print("Gegner hat gewonnen")
                         menu_state = "fight_overview"
                     elif log == "game_over_enemy":
-                        print("Spieler hat gewonnen")
                         menu_state = "fight_overview"
                         altar.trainer_bodies += 1
                 elif changed_my_mind_button.collidepoint(mouse_pos):
