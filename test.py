@@ -2,8 +2,12 @@ import Pokemon_Entwicklen
 import Pokemon_Klassen
 import Angriff_Klassen
 
-entwickeln = Pokemon_Entwicklen.Entwicklung()
+evolution = Pokemon_Entwicklen.Evolution()
 
-bauz = Pokemon_Klassen.Bauz(attacken=[Angriff_Klassen.Rasierblatt(), Angriff_Klassen.Fliegen()], fp=5, level=10)
+bauz = Pokemon_Klassen.Bauz(attacken=[Angriff_Klassen.Rasierblatt(), Angriff_Klassen.Fliegen()], level=10, maxkp=73)
 
-print(entwickeln.check_evolution(bauz))
+pokemon = bauz
+
+if evolution.check_evolution(pokemon) != None:
+    pokemon = evolution.evolution(pokemon)
+    print(pokemon.__dict__)

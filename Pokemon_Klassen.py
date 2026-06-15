@@ -68,7 +68,7 @@ class Arboretoss(Pokemon):
 class Silvarro(Pokemon):
     def __init__(self, name="Silvarro", typ=["Pflanze", "Geist"],
                  maxkp=78, atk=107, defence=75, spatk=100, spdef=100,
-                 init=70, level=30, currentkp=78, attacken=[], fp=0,
+                 init=70, level=20, currentkp=78, attacken=[], fp=0,
                  front_img="front_silvarro_img",
                  back_img="back_silvarro_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
