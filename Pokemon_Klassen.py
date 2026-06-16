@@ -1,5 +1,11 @@
 # Pokemon
 class Pokemon:
+    registry = {}
+
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+        Pokemon.registry[cls.__name__] = cls
+
     def __init__(
                  self, name, typ, maxkp, atk, defence, spatk, spdef, init,
                  attacken=None, level=1, currentkp=None, fp=0,
