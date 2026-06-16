@@ -11,6 +11,23 @@ class Evolution:
         ["Miezunder", 20 , "Fuegro"],
         ["Robball", 10, "Marikeck"],
         ["Marikeck", 20, "Primarene"],
+        ["Peppeck", 10, "Trompeck"],
+        ["Trompeck", 20, "Tukanon"],
+        ["Mangunior", 10, "Manguspektor"],
+        ["Mabula", 10, "Akkup"],
+        ["Akkup", 20, "Donarion"],
+        ["Krabbox", 10, "Krawell"],
+        ["Wommel", 10, "Bandelby"],
+        ["Garstella", 10, "Aggrostella"],
+        ["Pampuli", 10, "Pampross"],
+        ["Araqua", 10, "Aranestro"],
+        ["Bubungus", 10, "Lamellux"],
+        ["Molunk", 10, "Amfira"],
+        ["Velursi", 10, "Kosturso"],
+        ["Frubberl", 10, "Frubaila"],
+        ["Frubaila", 20, "Fruyal"],
+        ["Reißlaus", 10, "Tectass"],
+        ["Sankabuh", 10, "Colossand"],
     ]
 
     def check_evolution(self, pokemon: Pokemon) -> str:
