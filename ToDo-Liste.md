@@ -1,5 +1,4 @@
 # ToDo-Liste:
--README erstellen  
+-README verbessern  
 -Clean Code/Code sauber machen (pain)  
--Genaues balancing testen/anpassen/wiederholen 
--Entwickeln von Pokemon möglich machen
+-Genaues balancing testen/anpassen/wiederholen
