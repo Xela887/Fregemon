@@ -1,5 +1,11 @@
 # Pokemon
 class Pokemon:
+    registry = {}
+
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+        Pokemon.registry[cls.__name__] = cls
+
     def __init__(
                  self, name, typ, maxkp, atk, defence, spatk, spdef, init,
                  attacken=None, level=1, currentkp=None, fp=0,
@@ -68,7 +74,7 @@ class Arboretoss(Pokemon):
 class Silvarro(Pokemon):
     def __init__(self, name="Silvarro", typ=["Pflanze", "Geist"],
                  maxkp=78, atk=107, defence=75, spatk=100, spdef=100,
-                 init=70, level=30, currentkp=78, attacken=[], fp=0,
+                 init=70, level=20, currentkp=78, attacken=[], fp=0,
                  front_img="front_silvarro_img",
                  back_img="back_silvarro_img"):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,

@@ -2,6 +2,7 @@ from Angriff_Klassen import *
 from Pokemon_Klassen import *
 from Battle_Klasse import Battle
 from Balancer_Klasse import Balancer
+from Pokemon_Entwickeln import Evolution
 from tkinter import filedialog
 import tkinter as tk
 import random
@@ -119,6 +120,7 @@ Attacken = [
     Nebelexplosion, Zauberschein, Zauberturbo, Knuddler
 ]
 
+evolution = Evolution()
 
 root = tk.Tk()
 root.withdraw()
@@ -273,20 +275,23 @@ def load(Attacken):
         return [], []
 
     for p in daten.get("pokemon", []):
-        pokemon = Pokemon(p["name"],
-                          p["typ"],
-                          p["maxkp"],
-                          p["atk"],
-                          p["defence"],
-                          p["spatk"],
-                          p["spdef"],
-                          p["init"],
-                          [p["attacke_physic"], p["attacke_special"]],
-                          p["level"],
-                          p["currentkp"],
-                          p["fp"],
-                          p["front_img"],
-                          p["back_img"])
+        cls = Pokemon.registry.get(p["name"], Pokemon)
+
+        pokemon = cls(
+            p["name"],
+            p["typ"],
+            p["maxkp"],
+            p["atk"],
+            p["defence"],
+            p["spatk"],
+            p["spdef"],
+            p["init"],
+            p["level"],
+            p["currentkp"],
+            [p["attacke_physic"], p["attacke_special"]],
+            p["fp"],
+            p["front_img"],
+            p["back_img"])
         for poke in pokemonliste:
             if pokemon.name == poke.name:
                 pokemon = poke
@@ -299,20 +304,23 @@ def load(Attacken):
         pokemonliste.append(pokemon)
 
     for p in daten.get("pokemon_team", []):
-        pokemon = Pokemon(p["name"],
-                          p["maxkp"],
-                          p["typ"],
-                          p["atk"],
-                          p["defence"],
-                          p["spatk"],
-                          p["spdef"],
-                          p["init"],
-                          [p["attacke_physic"], p["attacke_special"]],
-                          p["level"],
-                          p["currentkp"],
-                          p["fp"],
-                          p["front_img"],
-                          p["back_img"])
+        cls = Pokemon.registry.get(p["name"], Pokemon)
+
+        pokemon = cls(
+            p["name"],
+            p["typ"],
+            p["maxkp"],
+            p["atk"],
+            p["defence"],
+            p["spatk"],
+            p["spdef"],
+            p["init"],
+            p["level"],
+            p["currentkp"],
+            [p["attacke_physic"], p["attacke_special"]],
+            p["fp"],
+            p["front_img"],
+            p["back_img"])
         for poke in pokemonliste:
             if pokemon.name == poke.name:
                 pokemon = poke
@@ -565,6 +573,10 @@ while running:
                     if altar.fp_amount > 0:
                         altar.fp_amount -= 1
                         selected_pokemon.fp += 1
+                if evolution.check_evolution(selected_pokemon) != None:
+                    if evolution_button.collidepoint(mouse_pos):
+                        evolution.evolution(selected_pokemon)
+
                 # KP
                 if pokemon_view_kp_plus_button and pokemon_view_kp_plus_button.collidepoint(mouse_pos):
                     if selected_pokemon.fp > 0:
@@ -930,6 +942,9 @@ while running:
         elif selected_pokemon not in spieler.pokemon_team:
             plusorminus = "+"
         add_pokemon_to_team_button = draw_button(f"{plusorminus} Team", window_width * 0.32, window_height * 0.74, window_width * 0.16, window_height * 0.04)
+
+        if evolution.check_evolution(selected_pokemon) != None:
+            evolution_button = draw_button("Entwickeln", window_width * 0.52, window_height * 0.74, window_width * 0.16, window_height * 0.04)
 
         back_button = draw_button("Zurück", window_width * 0.40, window_height * 0.85, window_width * 0.20, window_height * 0.06)
 
