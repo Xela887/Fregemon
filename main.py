@@ -303,7 +303,7 @@ def load(Attacken):
                 pokemon.attacken[1] = atk()
         pokemonliste.append(pokemon)
 
-    for p in daten.get("pokemon", []):
+    for p in daten.get("pokemon_team", []):
         cls = Pokemon.registry.get(p["name"], Pokemon)
 
         pokemon = cls(
