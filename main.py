@@ -275,7 +275,7 @@ def load(Attacken):
         return [], []
 
     for p in daten.get("pokemon", []):
-        cls = Pokemon.registry.get(p["name"], Pokemon)  # fallback to base class
+        cls = Pokemon.registry.get(p["name"], Pokemon)
 
         pokemon = cls(
             p["name"],
@@ -303,21 +303,24 @@ def load(Attacken):
                 pokemon.attacken[1] = atk()
         pokemonliste.append(pokemon)
 
-    for p in daten.get("pokemon_team", []):
-        pokemon = Pokemon(p["name"],
-                          p["maxkp"],
-                          p["typ"],
-                          p["atk"],
-                          p["defence"],
-                          p["spatk"],
-                          p["spdef"],
-                          p["init"],
-                          [p["attacke_physic"], p["attacke_special"]],
-                          p["level"],
-                          p["currentkp"],
-                          p["fp"],
-                          p["front_img"],
-                          p["back_img"])
+    for p in daten.get("pokemon", []):
+        cls = Pokemon.registry.get(p["name"], Pokemon)
+
+        pokemon = cls(
+            p["name"],
+            p["typ"],
+            p["maxkp"],
+            p["atk"],
+            p["defence"],
+            p["spatk"],
+            p["spdef"],
+            p["init"],
+            p["level"],
+            p["currentkp"],
+            [p["attacke_physic"], p["attacke_special"]],
+            p["fp"],
+            p["front_img"],
+            p["back_img"])
         for poke in pokemonliste:
             if pokemon.name == poke.name:
                 pokemon = poke
