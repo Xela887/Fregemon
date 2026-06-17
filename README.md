@@ -13,7 +13,7 @@
 
 Ein kleines Spiel, falls man langeweile hat.
 
-# Features
+## Features
 
 - Kämpfe gegen Gegner  
 - Fregemon hochleveln  
