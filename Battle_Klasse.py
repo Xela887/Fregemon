@@ -11,6 +11,14 @@ class Battle:
         self.enemy_move = None
         self.altar = altar
         self.player_dead_pokemon = []
+        self.eplog = []
+
+    def __update_eplog(self):
+        for logs in self.eplog:
+            if logs[0] == self.spieler_active_poke.name:
+                logs[1] += 100
+                return
+        self.eplog.append([self.spieler_active_poke.name, 100])
 
     def __calc_damage_physic(self, attacker, defender) -> float:
         return round((attacker.level * 0.4 + 2)
@@ -43,6 +51,7 @@ class Battle:
 
     def __process_player_win(self) -> None:
         self.spieler_active_poke.ep += 100
+        self.__update_eplog()
         self.spieler_active_poke.check_level_up()
         self.altar.pokemon_bodies += 1
 

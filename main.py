@@ -857,6 +857,16 @@ while running:
 
         pokemon_view_text_field = draw_button("", window_width * 0.30, window_height * 0.29, window_width * 0.40, window_height * 0.50)
 
+        height_adder = 0.45
+
+        for logs in battle.eplog:
+            ep_text = ""
+            ep_text += logs[0]+": "
+            ep_text += "+"+str(logs[1])+" EP"
+            ep_text_pos_y = window_height * height_adder
+            ep_log_text_field = draw_text(ep_text, window_width * 0.50, ep_text_pos_y, BLACK)
+            height_adder += 0.05
+
         if log == "game_over_player":
             text1 = "Du hast verloren"
         elif log == "game_over_enemy":
