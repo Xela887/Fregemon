@@ -29,9 +29,9 @@ Pygame 2.6.1
 
 ## Installierung
 
-Neuste Version des GitHub Repositories (main Branch) klonen oder eine Zip des Projekts herunterladen und dann die alle Dateien extrahieren. Falls nicht vorhanden, [benutzte Technologien installieren](#benutze-technolgien-installieren).
+Neuste Version des GitHub Repositories (main Branch) klonen oder eine Zip des Projekts herunterladen und dann die alle Dateien extrahieren. Falls nicht vorhanden, [benutzte Technologien installieren](#benutzte-technolgien-installieren).
 
-### Benutze Technolgien installieren
+### Benutzte Technolgien installieren
 
 Python installieren: Entweder im Microsoft Store installieren oder über https://www.python.org.  
 Pygame installieren: Der einfachste Weg ist in die Konsole/Terminal das einzugeben.  
