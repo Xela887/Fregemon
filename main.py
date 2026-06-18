@@ -207,6 +207,7 @@ def save(name, pokemonliste, altar, pokemon_team):
             "name" : pokemon.name,
             "typ": pokemon.typ,
             "level" : pokemon.level,
+            "ep" : pokemon.ep,
             "maxkp" : pokemon.maxkp,
             "atk" : pokemon.atk,
             "defence" : pokemon.defence,
@@ -233,6 +234,7 @@ def save(name, pokemonliste, altar, pokemon_team):
             "name": pokemon.name,
             "typ": pokemon.typ,
             "level": pokemon.level,
+            "ep" : pokemon.ep,
             "maxkp": pokemon.maxkp,
             "atk": pokemon.atk,
             "defence": pokemon.defence,
@@ -292,6 +294,7 @@ def load(Attacken):
             p["fp"],
             p["front_img"],
             p["back_img"])
+        pokemon.ep = p["ep"]
         for poke in pokemonliste:
             if pokemon.name == poke.name:
                 pokemon = poke
@@ -321,6 +324,7 @@ def load(Attacken):
             p["fp"],
             p["front_img"],
             p["back_img"])
+        pokemon.ep = p["ep"]
         for poke in pokemonliste:
             if pokemon.name == poke.name:
                 pokemon = poke
@@ -337,8 +341,8 @@ def load(Attacken):
     for a in daten.get("altar", []):
         altar = Altar_For_Sacrifices(a["pokemon_bodies"],
                                      a["trainer_bodies"],
-                                     a["sacrifice_count"],
-                                     a["fp_amount"])
+                                     a["fp_amount"],
+                                     a["sacrifice_count"])
 
     return spieler, altar
 
