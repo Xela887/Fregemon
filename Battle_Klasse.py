@@ -30,7 +30,7 @@ class Battle:
     def __calc_damage_special(self, attacker, defender) -> float:
         return round((attacker.level * 0.4 + 2)
                       * attacker.spatk
-                      * attacker.attacken[0].atkdmg
+                      * attacker.attacken[1].atkdmg
                       / (10 * defender.spdef)
                       * Effektivitaet.get_effectiveness(attacker.attacken[1].typ, defender.typ[0]), 2)
 
