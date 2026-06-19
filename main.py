@@ -45,15 +45,16 @@ class Altar_For_Sacrifices:
         self.pokemon_bodies = pokemon_bodies
         self.trainer_bodies = trainer_bodies
         self.sacrifice_count = sacrifice_count
+        self.sac_for_pokemon_cost = 3
         self.change_attack_cost = 5
         self.sac_for_fp_cost = 5
         self.sac_for_fp_amount = 3
         self.fp_amount = fp_amount
 
     def sacrifice_for_pokemon(self):
-        if self.pokemon_bodies >= 1 and self.trainer_bodies >= 1:
-            self.pokemon_bodies = 0
-            self.trainer_bodies = 0
+        if self.pokemon_bodies >= 3 and self.trainer_bodies >= 3:
+            self.pokemon_bodies -= 3
+            self.trainer_bodies -= 3
             new_pokemon = random.choice(filter_pokemon_by_level(all_pokemon))
             roll_new = False
             while True:
