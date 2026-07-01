@@ -157,6 +157,7 @@ pokemon_battlesprite = pygame.transform.scale(pokemon_battlesprite, (window_widt
 
 font = pygame.font.SysFont(None, 60)
 small_font = pygame.font.SysFont(None, 40)
+smaller_font = pygame.font.SysFont(None, 30)
 
 
 def draw_button(text, x, y, w, h):
@@ -168,6 +169,40 @@ def draw_button(text, x, y, w, h):
     screen.blit(text_surf, text_rect)
     return rect
 
+class TeamSlotBox:
+    def __init__(self, x, y, w, h):
+        self.__color = BLACK
+        self.__rect = pygame.Rect(x, y, w, h)
+        self.text = ""
+
+    def set_color(self, new_color):
+        self.__color = new_color
+
+    def draw(self):
+        self.box = pygame.draw.rect(screen, self.__color, self.__rect, 4)
+        self.text_surf = small_font.render(self.text, True, BLACK)
+        self.text_rect = self.text_surf.get_rect(center=self.__rect.center)
+        screen.blit(self.text_surf, self.text_rect)
+
+
+first_slot = TeamSlotBox(window_width * 0.21, window_height * 0.65, window_height * 0.15, window_height * 0.15)
+second_slot = TeamSlotBox(window_width * 0.31, window_height * 0.65, window_height * 0.15, window_height * 0.15)
+third_slot = TeamSlotBox(window_width * 0.41, window_height * 0.65, window_height * 0.15, window_height * 0.15)
+fourth_slot = TeamSlotBox(window_width * 0.51, window_height * 0.65, window_height * 0.15, window_height * 0.15)
+fifth_slot = TeamSlotBox(window_width * 0.61, window_height * 0.65, window_height * 0.15, window_height * 0.15)
+sixth_slot = TeamSlotBox(window_width * 0.71, window_height * 0.65, window_height * 0.15, window_height * 0.15)
+
+blue_box = first_slot
+blue_box.set_color(BLUE)
+
+box_team_number = {
+    first_slot : 0,
+    second_slot : 1,
+    third_slot : 2,
+    fourth_slot : 3,
+    fifth_slot : 4,
+    sixth_slot : 5
+}
 
 def draw_text(text, x, y, color=(255, 255, 255)):
     surf = font.render(text, True, color)
@@ -554,11 +589,51 @@ while running:
             elif menu_state == "view_pokemon":
                 if back_button.collidepoint(mouse_pos):
                     menu_state = "main_menu"
+                elif team_editor_button.collidepoint(mouse_pos):
+                    menu_state = "team_editor"
                 elif view_pokemon_stats_button_list:
                     for poke_name, btn in view_pokemon_stats_button_list:
                         if btn.collidepoint(mouse_pos):
                             selected_pokemon = next(p for p in spieler.pokemonliste if p.name == poke_name)
                             menu_state = "pokemon_stats"
+            
+            # Team Editor
+            elif menu_state == "team_editor":
+                if back_button.collidepoint(mouse_pos):
+                    menu_state = "view_pokemon"
+                elif view_pokemon_stats_button_list:
+                    for poke_name, btn in view_pokemon_stats_button_list:
+                        if btn.collidepoint(mouse_pos):
+                            selected_pokemon = next(p for p in spieler.pokemonliste if p.name == poke_name)
+                            if not selected_pokemon in spieler.pokemon_team:
+                                try:
+                                    spieler.pokemon_team[box_team_number[blue_box]] = selected_pokemon
+                                except IndexError:
+                                    spieler.pokemon_team.append(selected_pokemon)
+                if first_slot.box.collidepoint(mouse_pos):
+                    blue_box.set_color(BLACK)
+                    first_slot.set_color(BLUE)
+                    blue_box = first_slot
+                if second_slot.box.collidepoint(mouse_pos):
+                    blue_box.set_color(BLACK)
+                    second_slot.set_color(BLUE)
+                    blue_box = second_slot
+                if third_slot.box.collidepoint(mouse_pos):
+                    blue_box.set_color(BLACK)
+                    third_slot.set_color(BLUE)
+                    blue_box = third_slot
+                if fourth_slot.box.collidepoint(mouse_pos):
+                    blue_box.set_color(BLACK)
+                    fourth_slot.set_color(BLUE)
+                    blue_box = fourth_slot
+                if fifth_slot.box.collidepoint(mouse_pos):
+                    blue_box.set_color(BLACK)
+                    fifth_slot.set_color(BLUE)
+                    blue_box = fifth_slot
+                if sixth_slot.box.collidepoint(mouse_pos):
+                    blue_box.set_color(BLACK)
+                    sixth_slot.set_color(BLUE)
+                    blue_box = sixth_slot
 
             # Pokemon Stats
             elif menu_state == "pokemon_stats":
@@ -902,8 +977,55 @@ while running:
             view_pokemon_stats_button_list.append((poke, btn))
             width_adder += 0.20
             line_count += 1
+        
+        team_editor_button = draw_button("Team-Editor", window_width * 0.40, window_height * 0.78, window_width * 0.20, window_height * 0.06)
 
-        back_button = draw_button("Zurück", window_width * 0.40, window_height * 0.70, window_width * 0.20, window_height * 0.06)
+        back_button = draw_button("Zurück", window_width * 0.40, window_height * 0.85, window_width * 0.20, window_height * 0.06)
+
+    # Team Editor
+    elif menu_state == "team_editor":
+        title = font.render("Team-Editor", True, WHITE)
+        screen.blit(title, (window_width // 2 - title.get_width() // 2, window_height * 0.2))
+
+        pokemonliste = [str(poke.name) for poke in spieler.pokemonliste]
+
+        view_pokemon_stats_button_list = []
+
+        width_adder = 0.10
+        height_adder = 0.30
+        line_count = 0
+        for poke in pokemonliste:
+            if line_count == 4:
+                line_count = 0
+                height_adder += 0.10
+                width_adder = 0.10
+            btn = draw_button(poke, window_width * width_adder, window_height * height_adder, window_width * 0.18, window_height * 0.06)
+            view_pokemon_stats_button_list.append((poke, btn))
+            width_adder += 0.20
+            line_count += 1
+
+        for i in range(len(spieler.pokemon_team)):
+            if i == 0:
+                first_slot.text = spieler.pokemon_team[0].name
+            if i == 1:
+                second_slot.text = spieler.pokemon_team[1].name
+            if i == 2:
+                third_slot.text = spieler.pokemon_team[2].name
+            if i == 3:
+                fourth_slot.text = spieler.pokemon_team[3].name
+            if i == 4:
+                fifth_slot.text = spieler.pokemon_team[4].name
+            if i == 5:
+                sixth_slot.text = spieler.pokemon_team[5].name
+
+        first_slot.draw()
+        second_slot.draw()
+        third_slot.draw()
+        fourth_slot.draw()
+        fifth_slot.draw()
+        sixth_slot.draw()
+
+        back_button = draw_button("Zurück", window_width * 0.40, window_height * 0.85, window_width * 0.20, window_height * 0.06)
 
     # Pokemon Stats
     elif menu_state == "pokemon_stats":
