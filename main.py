@@ -159,6 +159,32 @@ font = pygame.font.SysFont(None, 60)
 small_font = pygame.font.SysFont(None, 40)
 smaller_font = pygame.font.SysFont(None, 30)
 
+class PokemonScrollBar:
+    def __init__(self, pokemonliste, size):
+        self.__pokemonliste = pokemonliste
+        self.__scrollbarliste = []
+        self.__size = size
+
+    def start(self):
+        for i in range(self.__size):
+            try:
+                self.__scrollbarliste.append(self.__pokemonliste[i])
+            except IndexError:
+                break
+
+    def __check_scrollable(self):
+        if len(self.__pokemonliste) > self.__size:
+            return True
+        else:
+            return False
+
+    def scroll_down(self):
+        if self.__check_scrollable():
+            pass
+
+    def scroll_up(self):
+        if self.__check_scrollable():
+            pass
 
 def draw_button(text, x, y, w, h):
     rect = pygame.Rect(x, y, w, h)
@@ -439,7 +465,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        elif event.type == pygame.MOUSEBUTTONDOWN:
+        elif event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed() == (True, False, False):
             mouse_pos = event.pos
 
             # Startmenü
@@ -789,6 +815,20 @@ while running:
                 player_name = player_name[:-1]
             else:
                 player_name += event.unicode
+
+        # Mausrad zum scrollen in einigen screens
+        elif event.type == pygame.MOUSEWHEEL:
+            if menu_state == "team_editor":
+                if event.y > 0:
+                    pass
+                elif event.y <0:
+                    pass
+            
+            elif menu_state == "pokemon_stats":
+                if event.y > 0:
+                    pass
+                elif event.y <0:
+                    pass
 
     # Startmenü
     if menu_state == "start_menu":
