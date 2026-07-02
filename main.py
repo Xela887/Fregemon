@@ -180,9 +180,9 @@ class TeamSlotBox:
 
     def draw(self):
         self.box = pygame.draw.rect(screen, self.__color, self.__rect, 4)
-        self.text_surf = small_font.render(self.text, True, BLACK)
-        self.text_rect = self.text_surf.get_rect(center=self.__rect.center)
-        screen.blit(self.text_surf, self.text_rect)
+        self.__text_surf = small_font.render(self.text, True, BLACK)
+        self.__text_rect = self.__text_surf.get_rect(center=self.__rect.center)
+        screen.blit(self.__text_surf, self.__text_rect)
 
 
 first_slot = TeamSlotBox(window_width * 0.21, window_height * 0.65, window_height * 0.15, window_height * 0.15)
@@ -604,12 +604,21 @@ while running:
                 elif view_pokemon_stats_button_list:
                     for poke_name, btn in view_pokemon_stats_button_list:
                         if btn.collidepoint(mouse_pos):
+                            pokemon_added = False
                             selected_pokemon = next(p for p in spieler.pokemonliste if p.name == poke_name)
                             if not selected_pokemon in spieler.pokemon_team:
                                 try:
                                     spieler.pokemon_team[box_team_number[blue_box]] = selected_pokemon
+                                    pokemon_added = True
                                 except IndexError:
                                     spieler.pokemon_team.append(selected_pokemon)
+                                    pokemon_added = True
+                            try:
+                                if selected_pokemon == spieler.pokemon_team[box_team_number[blue_box]] and pokemon_added == False:
+                                    spieler.pokemon_team.remove(selected_pokemon)
+                                    blue_box.text = ""
+                            except IndexError:
+                                pass
                 if first_slot.box.collidepoint(mouse_pos):
                     blue_box.set_color(BLACK)
                     first_slot.set_color(BLUE)
@@ -1003,6 +1012,13 @@ while running:
             view_pokemon_stats_button_list.append((poke, btn))
             width_adder += 0.20
             line_count += 1
+        
+        first_slot.text = ""
+        second_slot.text = ""
+        third_slot.text = ""
+        fourth_slot.text = ""
+        fifth_slot.text = ""
+        sixth_slot.text = ""
 
         for i in range(len(spieler.pokemon_team)):
             if i == 0:
