@@ -510,17 +510,7 @@ class Gufa(Pokemon):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
                          attacken, level, currentkp, fp, front_img, back_img)
 
-
-class Typ_Null(Pokemon):
-    def __init__(self, name="Typ:Null", typ=["Normal"],
-                 maxkp=95, atk=95, defence=95, spatk=95, spdef=95,
-                 init=59, level=1, currentkp=95, attacken=[], fp=0,
-                 front_img=None,
-                 back_img=None):
-        super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
-                         attacken, level, currentkp, fp, front_img, back_img)
-
-
+        
 class Amigento(Pokemon):
     def __init__(self, name="Amigento", typ=["Normal"],
                  maxkp=95, atk=95, defence=95, spatk=95, spdef=95,

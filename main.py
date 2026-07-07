@@ -97,7 +97,7 @@ all_pokemon = [
     Kommandutan, Quartermak,
     Reißlaus, Tectass,
     Sankabuh, Colossand,
-    Gufa, Typ_Null, Amigento
+    Gufa, Amigento
 ]
 
 Attacken = [
@@ -164,8 +164,10 @@ class PokemonScrollBar:
         self.__pokemonliste = pokemonliste
         self.__scrollbarliste = []
         self.__size = size
+        self.__start_index = 0
 
     def start(self):
+        self.__scrollbarliste = []
         for i in range(self.__size):
             try:
                 self.__scrollbarliste.append(self.__pokemonliste[i])
@@ -177,14 +179,38 @@ class PokemonScrollBar:
             return True
         else:
             return False
+    
+    def __can_scroll_down(self):
+        return self.__start_index + 4 < len(self.__pokemonliste)
 
     def scroll_down(self):
-        if self.__check_scrollable():
-            pass
+        if self.__check_scrollable() and self.__can_scroll_down():
+            self.__update_list_down()
+
+    def __update_list_down(self):
+        self.__start_index += 4
+        self.__scrollbarliste = []
+        for i in range(self.__size):
+            try:
+                self.__scrollbarliste.append(self.__pokemonliste[i + self.__start_index])
+            except IndexError:
+                break
 
     def scroll_up(self):
-        if self.__check_scrollable():
-            pass
+        if self.__check_scrollable() and self.__start_index != 0:
+            self.__update_list_up()
+
+    def __update_list_up(self):
+        self.__start_index -= 4
+        self.__scrollbarliste = []
+        for i in range(self.__size):
+            try:
+                self.__scrollbarliste.append(self.__pokemonliste[i + self.__start_index])
+            except IndexError:
+                break
+    
+    def get_scrollbarliste(self):
+        return self.__scrollbarliste
 
 def draw_button(text, x, y, w, h):
     rect = pygame.Rect(x, y, w, h)
@@ -211,12 +237,12 @@ class TeamSlotBox:
         screen.blit(self.__text_surf, self.__text_rect)
 
 
-first_slot = TeamSlotBox(window_width * 0.21, window_height * 0.65, window_height * 0.15, window_height * 0.15)
-second_slot = TeamSlotBox(window_width * 0.31, window_height * 0.65, window_height * 0.15, window_height * 0.15)
-third_slot = TeamSlotBox(window_width * 0.41, window_height * 0.65, window_height * 0.15, window_height * 0.15)
-fourth_slot = TeamSlotBox(window_width * 0.51, window_height * 0.65, window_height * 0.15, window_height * 0.15)
-fifth_slot = TeamSlotBox(window_width * 0.61, window_height * 0.65, window_height * 0.15, window_height * 0.15)
-sixth_slot = TeamSlotBox(window_width * 0.71, window_height * 0.65, window_height * 0.15, window_height * 0.15)
+first_slot = TeamSlotBox(window_width * 0.21, window_height * 0.68, window_height * 0.15, window_height * 0.15)
+second_slot = TeamSlotBox(window_width * 0.31, window_height * 0.68, window_height * 0.15, window_height * 0.15)
+third_slot = TeamSlotBox(window_width * 0.41, window_height * 0.68, window_height * 0.15, window_height * 0.15)
+fourth_slot = TeamSlotBox(window_width * 0.51, window_height * 0.68, window_height * 0.15, window_height * 0.15)
+fifth_slot = TeamSlotBox(window_width * 0.61, window_height * 0.68, window_height * 0.15, window_height * 0.15)
+sixth_slot = TeamSlotBox(window_width * 0.71, window_height * 0.68, window_height * 0.15, window_height * 0.15)
 
 blue_box = first_slot
 blue_box.set_color(BLUE)
@@ -530,6 +556,8 @@ while running:
                     menu_state = "start_combat"
                 elif view_pokemon_button.collidepoint(mouse_pos):
                     menu_state = "view_pokemon"
+                    view_pokemon_scrollbar = PokemonScrollBar(spieler.pokemonliste, 16)
+                    view_pokemon_scrollbar.start()
                 elif altar_for_sacrifices_button.collidepoint(mouse_pos):
                     menu_state = "altar_for_sacrifices"
                     continue
@@ -617,6 +645,8 @@ while running:
                     menu_state = "main_menu"
                 elif team_editor_button.collidepoint(mouse_pos):
                     menu_state = "team_editor"
+                    team_editor_scrollbar = PokemonScrollBar(spieler.pokemonliste, 16)
+                    team_editor_scrollbar.start()
                 elif view_pokemon_stats_button_list:
                     for poke_name, btn in view_pokemon_stats_button_list:
                         if btn.collidepoint(mouse_pos):
@@ -818,17 +848,17 @@ while running:
 
         # Mausrad zum scrollen in einigen screens
         elif event.type == pygame.MOUSEWHEEL:
-            if menu_state == "team_editor":
+            if menu_state == "view_pokemon":
                 if event.y > 0:
-                    pass
-                elif event.y <0:
-                    pass
+                    view_pokemon_scrollbar.scroll_up()
+                elif event.y < 0:
+                    view_pokemon_scrollbar.scroll_down()
             
-            elif menu_state == "pokemon_stats":
+            elif menu_state == "team_editor":
                 if event.y > 0:
-                    pass
+                    team_editor_scrollbar.scroll_up()
                 elif event.y <0:
-                    pass
+                    team_editor_scrollbar.scroll_down()
 
     # Startmenü
     if menu_state == "start_menu":
@@ -1010,7 +1040,7 @@ while running:
         title = font.render("Pokemon", True, WHITE)
         screen.blit(title, (window_width // 2 - title.get_width() // 2, window_height * 0.2))
 
-        pokemonliste = [str(poke.name) for poke in spieler.pokemonliste]
+        pokemonliste = [str(poke.name) for poke in view_pokemon_scrollbar.get_scrollbarliste()]
 
         view_pokemon_stats_button_list = []
 
@@ -1036,7 +1066,7 @@ while running:
         title = font.render("Team-Editor", True, WHITE)
         screen.blit(title, (window_width // 2 - title.get_width() // 2, window_height * 0.2))
 
-        pokemonliste = [str(poke.name) for poke in spieler.pokemonliste]
+        pokemonliste = [str(poke.name) for poke in team_editor_scrollbar.get_scrollbarliste()]
 
         view_pokemon_stats_button_list = []
 
