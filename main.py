@@ -174,7 +174,7 @@ class PokemonScrollBar:
             except IndexError:
                 break
 
-    def __check_scrollable(self):
+    def check_scrollable(self):
         if len(self.__pokemonliste) > self.__size:
             return True
         else:
@@ -184,7 +184,7 @@ class PokemonScrollBar:
         return self.__start_index + 4 < len(self.__pokemonliste)
 
     def scroll_down(self):
-        if self.__check_scrollable() and self.__can_scroll_down():
+        if self.check_scrollable() and self.__can_scroll_down():
             self.__update_list_down()
 
     def __update_list_down(self):
@@ -197,7 +197,7 @@ class PokemonScrollBar:
                 break
 
     def scroll_up(self):
-        if self.__check_scrollable() and self.__start_index != 0:
+        if self.check_scrollable() and self.__start_index != 0:
             self.__update_list_up()
 
     def __update_list_up(self):
@@ -211,6 +211,12 @@ class PokemonScrollBar:
     
     def get_scrollbarliste(self):
         return self.__scrollbarliste
+    
+    def draw_scrollbar_indicator_frame(self):
+        rect = pygame.Rect(window_width * 0.89, window_height * 0.30, window_width * 0.01, window_height * 0.36)
+        pygame.draw.rect(screen, WHITE, rect)
+        pygame.draw.rect(screen, GRAY, rect, 3)
+
 
 def draw_button(text, x, y, w, h):
     rect = pygame.Rect(x, y, w, h)
@@ -1057,6 +1063,9 @@ while running:
             width_adder += 0.20
             line_count += 1
         
+        if view_pokemon_scrollbar.check_scrollable():
+            view_pokemon_scrollbar.draw_scrollbar_indicator_frame()
+        
         team_editor_button = draw_button("Team-Editor", window_width * 0.40, window_height * 0.78, window_width * 0.20, window_height * 0.06)
 
         back_button = draw_button("Zurück", window_width * 0.40, window_height * 0.85, window_width * 0.20, window_height * 0.06)
@@ -1110,6 +1119,9 @@ while running:
         fourth_slot.draw()
         fifth_slot.draw()
         sixth_slot.draw()
+
+        if team_editor_scrollbar.check_scrollable():
+            team_editor_scrollbar.draw_scrollbar_indicator_frame()
 
         back_button = draw_button("Zurück", window_width * 0.40, window_height * 0.85, window_width * 0.20, window_height * 0.06)
 
