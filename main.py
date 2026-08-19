@@ -217,6 +217,12 @@ class PokemonScrollBar:
         pygame.draw.rect(screen, WHITE, rect)
         pygame.draw.rect(screen, GRAY, rect, 3)
 
+    def draw_scrollbar_indicator(self):
+        lines = ((len(self.__pokemonliste) - self.__size) // 4) + 5
+        spaces = (window_height * 0.36) / lines
+        indicator_position = spaces * (self.__start_index / 4)
+        rect = pygame.Rect(window_width * 0.89, window_height * 0.30 + indicator_position, window_width * 0.01, spaces)
+        pygame.draw.rect(screen, GRAY, rect)
 
 def draw_button(text, x, y, w, h):
     rect = pygame.Rect(x, y, w, h)
@@ -1065,6 +1071,7 @@ while running:
         
         if view_pokemon_scrollbar.check_scrollable():
             view_pokemon_scrollbar.draw_scrollbar_indicator_frame()
+            view_pokemon_scrollbar.draw_scrollbar_indicator()
         
         team_editor_button = draw_button("Team-Editor", window_width * 0.40, window_height * 0.78, window_width * 0.20, window_height * 0.06)
 
@@ -1122,6 +1129,7 @@ while running:
 
         if team_editor_scrollbar.check_scrollable():
             team_editor_scrollbar.draw_scrollbar_indicator_frame()
+            team_editor_scrollbar.draw_scrollbar_indicator()
 
         back_button = draw_button("Zurück", window_width * 0.40, window_height * 0.85, window_width * 0.20, window_height * 0.06)
 
