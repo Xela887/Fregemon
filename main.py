@@ -45,15 +45,16 @@ class Altar_For_Sacrifices:
         self.pokemon_bodies = pokemon_bodies
         self.trainer_bodies = trainer_bodies
         self.sacrifice_count = sacrifice_count
+        self.sac_for_pokemon_cost = 3
         self.change_attack_cost = 5
         self.sac_for_fp_cost = 5
         self.sac_for_fp_amount = 3
         self.fp_amount = fp_amount
 
     def sacrifice_for_pokemon(self):
-        if self.pokemon_bodies >= 1 and self.trainer_bodies >= 1:
-            self.pokemon_bodies = 0
-            self.trainer_bodies = 0
+        if self.pokemon_bodies >= 3 and self.trainer_bodies >= 3:
+            self.pokemon_bodies -= 3
+            self.trainer_bodies -= 3
             new_pokemon = random.choice(filter_pokemon_by_level(all_pokemon))
             roll_new = False
             while True:
@@ -96,7 +97,7 @@ all_pokemon = [
     Kommandutan, Quartermak,
     Reißlaus, Tectass,
     Sankabuh, Colossand,
-    Gufa, Typ_Null, Amigento
+    Gufa, Amigento
 ]
 
 Attacken = [
@@ -156,7 +157,72 @@ pokemon_battlesprite = pygame.transform.scale(pokemon_battlesprite, (window_widt
 
 font = pygame.font.SysFont(None, 60)
 small_font = pygame.font.SysFont(None, 40)
+smaller_font = pygame.font.SysFont(None, 30)
 
+class PokemonScrollBar:
+    def __init__(self, pokemonliste, size):
+        self.__pokemonliste = pokemonliste
+        self.__scrollbarliste = []
+        self.__size = size
+        self.__start_index = 0
+
+    def start(self):
+        self.__scrollbarliste = []
+        for i in range(self.__size):
+            try:
+                self.__scrollbarliste.append(self.__pokemonliste[i])
+            except IndexError:
+                break
+
+    def check_scrollable(self):
+        if len(self.__pokemonliste) > self.__size:
+            return True
+        else:
+            return False
+    
+    def __can_scroll_down(self):
+        return self.__start_index + 4 < len(self.__pokemonliste)
+
+    def scroll_down(self):
+        if self.check_scrollable() and self.__can_scroll_down():
+            self.__update_list_down()
+
+    def __update_list_down(self):
+        self.__start_index += 4
+        self.__scrollbarliste = []
+        for i in range(self.__size):
+            try:
+                self.__scrollbarliste.append(self.__pokemonliste[i + self.__start_index])
+            except IndexError:
+                break
+
+    def scroll_up(self):
+        if self.check_scrollable() and self.__start_index != 0:
+            self.__update_list_up()
+
+    def __update_list_up(self):
+        self.__start_index -= 4
+        self.__scrollbarliste = []
+        for i in range(self.__size):
+            try:
+                self.__scrollbarliste.append(self.__pokemonliste[i + self.__start_index])
+            except IndexError:
+                break
+    
+    def get_scrollbarliste(self):
+        return self.__scrollbarliste
+    
+    def draw_scrollbar_indicator_frame(self):
+        rect = pygame.Rect(window_width * 0.89, window_height * 0.30, window_width * 0.01, window_height * 0.36)
+        pygame.draw.rect(screen, WHITE, rect)
+        pygame.draw.rect(screen, GRAY, rect, 3)
+
+    def draw_scrollbar_indicator(self):
+        lines = ((len(self.__pokemonliste) - self.__size) // 4) + 5
+        spaces = (window_height * 0.36) / lines
+        indicator_position = spaces * (self.__start_index / 4)
+        rect = pygame.Rect(window_width * 0.89, window_height * 0.30 + indicator_position, window_width * 0.01, spaces)
+        pygame.draw.rect(screen, GRAY, rect)
 
 def draw_button(text, x, y, w, h):
     rect = pygame.Rect(x, y, w, h)
@@ -167,6 +233,40 @@ def draw_button(text, x, y, w, h):
     screen.blit(text_surf, text_rect)
     return rect
 
+class TeamSlotBox:
+    def __init__(self, x, y, w, h):
+        self.__color = BLACK
+        self.__rect = pygame.Rect(x, y, w, h)
+        self.text = ""
+
+    def set_color(self, new_color):
+        self.__color = new_color
+
+    def draw(self):
+        self.box = pygame.draw.rect(screen, self.__color, self.__rect, 4)
+        self.__text_surf = small_font.render(self.text, True, BLACK)
+        self.__text_rect = self.__text_surf.get_rect(center=self.__rect.center)
+        screen.blit(self.__text_surf, self.__text_rect)
+
+
+first_slot = TeamSlotBox(window_width * 0.21, window_height * 0.68, window_height * 0.15, window_height * 0.15)
+second_slot = TeamSlotBox(window_width * 0.31, window_height * 0.68, window_height * 0.15, window_height * 0.15)
+third_slot = TeamSlotBox(window_width * 0.41, window_height * 0.68, window_height * 0.15, window_height * 0.15)
+fourth_slot = TeamSlotBox(window_width * 0.51, window_height * 0.68, window_height * 0.15, window_height * 0.15)
+fifth_slot = TeamSlotBox(window_width * 0.61, window_height * 0.68, window_height * 0.15, window_height * 0.15)
+sixth_slot = TeamSlotBox(window_width * 0.71, window_height * 0.68, window_height * 0.15, window_height * 0.15)
+
+blue_box = first_slot
+blue_box.set_color(BLUE)
+
+box_team_number = {
+    first_slot : 0,
+    second_slot : 1,
+    third_slot : 2,
+    fourth_slot : 3,
+    fifth_slot : 4,
+    sixth_slot : 5
+}
 
 def draw_text(text, x, y, color=(255, 255, 255)):
     surf = font.render(text, True, color)
@@ -207,6 +307,7 @@ def save(name, pokemonliste, altar, pokemon_team):
             "name" : pokemon.name,
             "typ": pokemon.typ,
             "level" : pokemon.level,
+            "ep" : pokemon.ep,
             "maxkp" : pokemon.maxkp,
             "atk" : pokemon.atk,
             "defence" : pokemon.defence,
@@ -233,6 +334,7 @@ def save(name, pokemonliste, altar, pokemon_team):
             "name": pokemon.name,
             "typ": pokemon.typ,
             "level": pokemon.level,
+            "ep" : pokemon.ep,
             "maxkp": pokemon.maxkp,
             "atk": pokemon.atk,
             "defence": pokemon.defence,
@@ -292,6 +394,7 @@ def load(Attacken):
             p["fp"],
             p["front_img"],
             p["back_img"])
+        pokemon.ep = p["ep"]
         for poke in pokemonliste:
             if pokemon.name == poke.name:
                 pokemon = poke
@@ -321,6 +424,7 @@ def load(Attacken):
             p["fp"],
             p["front_img"],
             p["back_img"])
+        pokemon.ep = p["ep"]
         for poke in pokemonliste:
             if pokemon.name == poke.name:
                 pokemon = poke
@@ -337,8 +441,8 @@ def load(Attacken):
     for a in daten.get("altar", []):
         altar = Altar_For_Sacrifices(a["pokemon_bodies"],
                                      a["trainer_bodies"],
-                                     a["sacrifice_count"],
-                                     a["fp_amount"])
+                                     a["fp_amount"],
+                                     a["sacrifice_count"])
 
     return spieler, altar
 
@@ -399,7 +503,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        elif event.type == pygame.MOUSEBUTTONDOWN:
+        elif event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed() == (True, False, False):
             mouse_pos = event.pos
 
             # Startmenü
@@ -464,6 +568,8 @@ while running:
                     menu_state = "start_combat"
                 elif view_pokemon_button.collidepoint(mouse_pos):
                     menu_state = "view_pokemon"
+                    view_pokemon_scrollbar = PokemonScrollBar(spieler.pokemonliste, 16)
+                    view_pokemon_scrollbar.start()
                 elif altar_for_sacrifices_button.collidepoint(mouse_pos):
                     menu_state = "altar_for_sacrifices"
                     continue
@@ -549,11 +655,62 @@ while running:
             elif menu_state == "view_pokemon":
                 if back_button.collidepoint(mouse_pos):
                     menu_state = "main_menu"
+                elif team_editor_button.collidepoint(mouse_pos):
+                    menu_state = "team_editor"
+                    team_editor_scrollbar = PokemonScrollBar(spieler.pokemonliste, 16)
+                    team_editor_scrollbar.start()
                 elif view_pokemon_stats_button_list:
                     for poke_name, btn in view_pokemon_stats_button_list:
                         if btn.collidepoint(mouse_pos):
                             selected_pokemon = next(p for p in spieler.pokemonliste if p.name == poke_name)
                             menu_state = "pokemon_stats"
+            
+            # Team Editor
+            elif menu_state == "team_editor":
+                if back_button.collidepoint(mouse_pos):
+                    menu_state = "view_pokemon"
+                elif view_pokemon_stats_button_list:
+                    for poke_name, btn in view_pokemon_stats_button_list:
+                        if btn.collidepoint(mouse_pos):
+                            pokemon_added = False
+                            selected_pokemon = next(p for p in spieler.pokemonliste if p.name == poke_name)
+                            if not selected_pokemon in spieler.pokemon_team:
+                                try:
+                                    spieler.pokemon_team[box_team_number[blue_box]] = selected_pokemon
+                                    pokemon_added = True
+                                except IndexError:
+                                    spieler.pokemon_team.append(selected_pokemon)
+                                    pokemon_added = True
+                            try:
+                                if selected_pokemon == spieler.pokemon_team[box_team_number[blue_box]] and pokemon_added == False:
+                                    spieler.pokemon_team.remove(selected_pokemon)
+                                    blue_box.text = ""
+                            except IndexError:
+                                pass
+                if first_slot.box.collidepoint(mouse_pos):
+                    blue_box.set_color(BLACK)
+                    first_slot.set_color(BLUE)
+                    blue_box = first_slot
+                if second_slot.box.collidepoint(mouse_pos):
+                    blue_box.set_color(BLACK)
+                    second_slot.set_color(BLUE)
+                    blue_box = second_slot
+                if third_slot.box.collidepoint(mouse_pos):
+                    blue_box.set_color(BLACK)
+                    third_slot.set_color(BLUE)
+                    blue_box = third_slot
+                if fourth_slot.box.collidepoint(mouse_pos):
+                    blue_box.set_color(BLACK)
+                    fourth_slot.set_color(BLUE)
+                    blue_box = fourth_slot
+                if fifth_slot.box.collidepoint(mouse_pos):
+                    blue_box.set_color(BLACK)
+                    fifth_slot.set_color(BLUE)
+                    blue_box = fifth_slot
+                if sixth_slot.box.collidepoint(mouse_pos):
+                    blue_box.set_color(BLACK)
+                    sixth_slot.set_color(BLUE)
+                    blue_box = sixth_slot
 
             # Pokemon Stats
             elif menu_state == "pokemon_stats":
@@ -700,6 +857,20 @@ while running:
                 player_name = player_name[:-1]
             else:
                 player_name += event.unicode
+
+        # Mausrad zum scrollen in einigen screens
+        elif event.type == pygame.MOUSEWHEEL:
+            if menu_state == "view_pokemon":
+                if event.y > 0:
+                    view_pokemon_scrollbar.scroll_up()
+                elif event.y < 0:
+                    view_pokemon_scrollbar.scroll_down()
+            
+            elif menu_state == "team_editor":
+                if event.y > 0:
+                    team_editor_scrollbar.scroll_up()
+                elif event.y <0:
+                    team_editor_scrollbar.scroll_down()
 
     # Startmenü
     if menu_state == "start_menu":
@@ -857,6 +1028,16 @@ while running:
 
         pokemon_view_text_field = draw_button("", window_width * 0.30, window_height * 0.29, window_width * 0.40, window_height * 0.50)
 
+        height_adder = 0.45
+
+        for logs in battle.eplog:
+            ep_text = ""
+            ep_text += logs[0]+": "
+            ep_text += "+"+str(logs[1])+" EP"
+            ep_text_pos_y = window_height * height_adder
+            ep_log_text_field = draw_text(ep_text, window_width * 0.50, ep_text_pos_y, BLACK)
+            height_adder += 0.05
+
         if log == "game_over_player":
             text1 = "Du hast verloren"
         elif log == "game_over_enemy":
@@ -871,7 +1052,7 @@ while running:
         title = font.render("Pokemon", True, WHITE)
         screen.blit(title, (window_width // 2 - title.get_width() // 2, window_height * 0.2))
 
-        pokemonliste = [str(poke.name) for poke in spieler.pokemonliste]
+        pokemonliste = [str(poke.name) for poke in view_pokemon_scrollbar.get_scrollbarliste()]
 
         view_pokemon_stats_button_list = []
 
@@ -887,8 +1068,70 @@ while running:
             view_pokemon_stats_button_list.append((poke, btn))
             width_adder += 0.20
             line_count += 1
+        
+        if view_pokemon_scrollbar.check_scrollable():
+            view_pokemon_scrollbar.draw_scrollbar_indicator_frame()
+            view_pokemon_scrollbar.draw_scrollbar_indicator()
+        
+        team_editor_button = draw_button("Team-Editor", window_width * 0.40, window_height * 0.78, window_width * 0.20, window_height * 0.06)
 
-        back_button = draw_button("Zurück", window_width * 0.40, window_height * 0.70, window_width * 0.20, window_height * 0.06)
+        back_button = draw_button("Zurück", window_width * 0.40, window_height * 0.85, window_width * 0.20, window_height * 0.06)
+
+    # Team Editor
+    elif menu_state == "team_editor":
+        title = font.render("Team-Editor", True, WHITE)
+        screen.blit(title, (window_width // 2 - title.get_width() // 2, window_height * 0.2))
+
+        pokemonliste = [str(poke.name) for poke in team_editor_scrollbar.get_scrollbarliste()]
+
+        view_pokemon_stats_button_list = []
+
+        width_adder = 0.10
+        height_adder = 0.30
+        line_count = 0
+        for poke in pokemonliste:
+            if line_count == 4:
+                line_count = 0
+                height_adder += 0.10
+                width_adder = 0.10
+            btn = draw_button(poke, window_width * width_adder, window_height * height_adder, window_width * 0.18, window_height * 0.06)
+            view_pokemon_stats_button_list.append((poke, btn))
+            width_adder += 0.20
+            line_count += 1
+        
+        first_slot.text = ""
+        second_slot.text = ""
+        third_slot.text = ""
+        fourth_slot.text = ""
+        fifth_slot.text = ""
+        sixth_slot.text = ""
+
+        for i in range(len(spieler.pokemon_team)):
+            if i == 0:
+                first_slot.text = spieler.pokemon_team[0].name
+            if i == 1:
+                second_slot.text = spieler.pokemon_team[1].name
+            if i == 2:
+                third_slot.text = spieler.pokemon_team[2].name
+            if i == 3:
+                fourth_slot.text = spieler.pokemon_team[3].name
+            if i == 4:
+                fifth_slot.text = spieler.pokemon_team[4].name
+            if i == 5:
+                sixth_slot.text = spieler.pokemon_team[5].name
+
+        first_slot.draw()
+        second_slot.draw()
+        third_slot.draw()
+        fourth_slot.draw()
+        fifth_slot.draw()
+        sixth_slot.draw()
+
+        if team_editor_scrollbar.check_scrollable():
+            team_editor_scrollbar.draw_scrollbar_indicator_frame()
+            team_editor_scrollbar.draw_scrollbar_indicator()
+
+        back_button = draw_button("Zurück", window_width * 0.40, window_height * 0.85, window_width * 0.20, window_height * 0.06)
 
     # Pokemon Stats
     elif menu_state == "pokemon_stats":
