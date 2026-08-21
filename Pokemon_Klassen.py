@@ -519,3 +519,29 @@ class Amigento(Pokemon):
                  back_img=None):
         super().__init__(name, typ, maxkp, atk, defence, spatk, spdef, init,
                          attacken, level, currentkp, fp, front_img, back_img)
+
+
+# Alle Pokemon
+all_pokemon = [
+    Bauz, Arboretoss, Silvarro,
+    Flamiau, Miezunder, Fuegro,
+    Robball, Marikeck, Primarene,
+    Peppeck, Trompeck, Tukanon,
+    Mangunior, Manguspektor,
+    Mabula, Akkup, Donarion,
+    Krabbox, Krawell,
+    Wommel, Bandelby,
+    Garstella, Aggrostella,
+    Pampuli, Pampross,
+    Araqua, Aranestro,
+    Imantis, Mantidea,
+    Bubungus, Lamellux,
+    Molunk, Amfira,
+    Velursi, Kosturso,
+    Frubberl, Frubaila, Fruyal,
+    Curelei,
+    Kommandutan, Quartermak,
+    Reißlaus, Tectass,
+    Sankabuh, Colossand,
+    Gufa, Amigento
+]

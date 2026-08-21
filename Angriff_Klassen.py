@@ -313,3 +313,25 @@ class Zauberturbo(Attacke):
 class Knuddler(Attacke):
     def __init__(self):
         super().__init__(90, "Fee", "physisch")
+
+
+Attacken = [
+    Kratzer, Sternschauer, Schallwelle, Risikotackle,
+    Ableithieb, Durchbruch, Fußtritt, Fokusstoß,
+    Pflücker, Orkan, Fliegen, Akrobatik,
+    Giftschock, Matschbombe, Giftzahn, Schlammwoge,
+    Lehmschuss, Dampfwalze, Schaufler, Erdbeben,
+    Felsgrab, Steinhagel, Juwelenkraft, Steinkante,
+    Käfertrutz, Blutsauger, Kehrtwende, Pollenknödel,
+    Phantomkraft, Erstauner, Spukball, Unheilböen,
+    Lichtkanone, Gigantenhieb, Eisenschädel, TachyonSchnitt,
+    Feuerzahn, Flammenwurf, Einäschern, Lohekanonade, Flammenblitz,
+    Wasserdüse, KalteDusche, Lehmbrühe, Surfer,
+    Rasierblatt, Blattwerk, Gigasauger, Strauchler,
+    Ladestrahl, Ladungsstoß, Donnerschlag, Kreuzdonner,
+    Psychobeißer, Konfusion, Flächenmacht, Psychoschneide,
+    Eissturm, Eishammer, Eisstrahl, Blizzardlanze,
+    Wutanfall, Drachenrute, Raumschlag, Schuppenrasseln,
+    Biss, Kniefalltrick, Klingenschwall, Finsteraura,
+    Nebelexplosion, Zauberschein, Zauberturbo, Knuddler
+]
