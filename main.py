@@ -1,4 +1,6 @@
-from gui import start_gui
+from new_gui import Gui
 
 
-start_gui()
+gui = Gui()
+
+gui.start()
