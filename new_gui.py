@@ -2,7 +2,7 @@ from GameClass import GameClass
 import Trainer_Klasse as Trainer
 import Altar_Klasse
 from Pokemon_Klassen import Bauz, Flamiau, Robball
-from Angriff_Klassen import Rasierblatt, Fliegen, Feuerzahn, Einäschern, Wasserdüse, KalteDusche
+from Angriff_Klassen import Rasierblatt, Fliegen, Feuerzahn, Einäschern, Wasserdüse, KalteDusche, Attacken
 import Save_Load
 import Widgets
 import tkinter as tk
@@ -395,9 +395,9 @@ class PokemonOverview(Screen):
         self.team_editor_button.handle_event(event)
         self.back_button.handle_event(event)
 
+        mouse_pos = pygame.mouse.get_pos()
         if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed() == (True, False, False):
             for poke_name, btn in self.view_pokemon_stats_button_list:
-                mouse_pos = pygame.mouse.get_pos()
                 if btn.rect.collidepoint(mouse_pos):
                     self.selected_pokemon = next(p for p in self.game_manager.spieler.pokemonliste if p.name == poke_name)
                     self.game_manager.selected_pokemon = self.selected_pokemon
@@ -459,7 +459,7 @@ class PokemonStats(Screen):
         self.level_label = Widgets.Label(f"Level: {self.game_manager.selected_pokemon.level}", (manager.window_width * 0.43, manager.window_height * 0.32), 60)
         self.ep_label = Widgets.Label(f"EP: {round(self.game_manager.selected_pokemon.ep, 2)}/{round(100 * self.game_manager.selected_pokemon.level ** 1.1, 2)}",
                                       (manager.window_width * 0.43, manager.window_height * 0.37), 60)
-        self.typ_label = Widgets.Label(f"Typ: {', '.join(self.game_manager.selected_pokemon.typ)}", (manager.window_width * 0.43, manager.window_height * 0.42), 60)
+        self.type_label = Widgets.Label(f"Typ: {', '.join(self.game_manager.selected_pokemon.typ)}", (manager.window_width * 0.43, manager.window_height * 0.42), 60)
         self.kp_label = Widgets.Label(f"KP: {self.game_manager.selected_pokemon.maxkp}", (manager.window_width * 0.43, manager.window_height * 0.47), 60)
         self.atk_label = Widgets.Label(f"ATK: {self.game_manager.selected_pokemon.atk}", (manager.window_width * 0.43, manager.window_height * 0.52), 60)
         self.def_label = Widgets.Label(f"DEF: {self.game_manager.selected_pokemon.defence}", (manager.window_width * 0.43, manager.window_height * 0.57), 60)
@@ -576,7 +576,7 @@ class PokemonStats(Screen):
 
         self.level_label.draw(surface)
         self.ep_label.draw(surface)
-        self.typ_label.draw(surface)
+        self.type_label.draw(surface)
         self.kp_label.draw(surface)
         self.atk_label.draw(surface)
         self.def_label.draw(surface)
@@ -698,24 +698,234 @@ class PokemonStats(Screen):
 
 class ViewPhysicalAttack(Screen):
     def __init__(self, manager, game_manager):
-            super().__init__(manager, game_manager)
+        super().__init__(manager, game_manager)
+
+        self.title = Widgets.Label(str(game_manager.selected_pokemon.attacken[0].__class__.__name__), 
+                                    (manager.window_width // 2, manager.window_height * 0.2), 60, manager.WHITE)
+
+        self.damage_label = Widgets.Label(f"Schaden: {game_manager.selected_pokemon.attacken[0].atkdmg}", 
+                                            (manager.window_width * 0.50, manager.window_height * 0.37), 60)
+        self.type_label = Widgets.Label(f"Typ: {game_manager.selected_pokemon.attacken[0].typ}", 
+                                        (manager.window_width * 0.50, manager.window_height * 0.42), 60)
+        self.attack_type_label = Widgets.Label(f"Attackentyp: {game_manager.selected_pokemon.attacken[0].dmgtype}", 
+                                                (manager.window_width * 0.50, manager.window_height * 0.47), 60)
+        self.change_cost_label = Widgets.Label(f"Kosten: {game_manager.altar.change_attack_cost} Besiegte Trainer", 
+                                                (manager.window_width * 0.50, manager.window_height * 0.60), 60)
+        self.change_attack_button = Widgets.Button("Wechseln", (manager.window_width * 0.42, manager.window_height * 0.65, 
+                                                                manager.window_width * 0.16, manager.window_height * 0.04))
+        self.change_attack_button.set_action(self.change_attack)
+
+        self.back_button = Widgets.Button("Zurück", (manager.window_width * 0.40, manager.window_height * 0.75, 
+                                                        manager.window_width * 0.20, manager.window_height * 0.06))
+        self.back_button.set_action(self.back)
     
     def handle_events(self, event):
-        pass
+        self.change_attack_button.handle_event(event)
+
+        self.back_button.handle_event(event)
 
     def draw(self, surface):
-        pass
+        self.title.draw(surface)
+
+        pygame.draw.rect(surface, self.manager.WHITE, (self.manager.window_width * 0.33, self.manager.window_height * 0.29, 
+                                                       self.manager.window_width * 0.34, self.manager.window_height * 0.45))
+        pygame.draw.rect(surface, self.manager.GRAY, (self.manager.window_width * 0.33, self.manager.window_height * 0.29, 
+                                                       self.manager.window_width * 0.34, self.manager.window_height * 0.45),
+                                                       width=3)
+        self.damage_label.draw(surface)
+        self.type_label.draw(surface)
+        self.attack_type_label.draw(surface)
+        self.change_cost_label.draw(surface)
+        self.change_attack_button.draw(surface)
+
+        self.back_button.draw(surface)
+
+    def change_attack(self):
+        self.game_manager.altar.trainer_bodies -= self.game_manager.altar.change_attack_cost
+        self.manager.change_screen(ChangePhysicalAttack(self.manager, self.game_manager))
+
+    def back(self):
+        self.manager.change_screen(PokemonStats(self.manager, self.game_manager))
+
+
+class ChangePhysicalAttack(Screen):
+    def __init__(self, manager, game_manager):
+        super().__init__(manager, game_manager)
+
+        self.title = Widgets.Label("Neue Attacke wählen", (manager.window_width // 2, manager.window_height * 0.2), 60, manager.WHITE)
+
+        alle_attacken = [cls() for cls in Attacken]
+        
+        gefilterte_attacken = []
+        for attacke in alle_attacken:
+            if (getattr(attacke, "dmgtype") == "physisch"
+            and getattr(attacke, "typ") in game_manager.selected_pokemon.typ
+            and attacke.__class__.__name__ != game_manager.selected_pokemon.attacken[0].__class__.__name__):
+                gefilterte_attacken.append(attacke)
+
+        attackenliste = [attacke for attacke in gefilterte_attacken]
+
+        self.view_attacken_button_list = []
+
+        width_adder = 0.10
+        height_adder = 0.30
+        line_count = 0
+        for attacke in attackenliste:
+            if line_count == 4:
+                line_count = 0
+                height_adder += 0.08
+                width_adder = 0.10
+            btn = Widgets.Button(
+                attacke.__class__.__name__,
+                (manager.window_width * width_adder,
+                manager.window_height * height_adder,
+                manager.window_width * 0.18,
+                manager.window_height * 0.06)
+            )
+            self.view_attacken_button_list.append((attacke, btn))
+            width_adder += 0.20
+            line_count += 1
+
+        self.back_button = Widgets.Button("Zurück", (manager.window_width * 0.40, manager.window_height * 0.85, 
+                                                        manager.window_width * 0.20,  manager.window_height * 0.06))
+        self.back_button.set_action(self.back)
+    
+    def handle_events(self, event):
+        mouse_pos = pygame.mouse.get_pos()
+        if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed() == (True, False, False):
+            for attacke, btn in self.view_attacken_button_list:
+                if btn.rect.collidepoint(mouse_pos):
+                    selected_attack = next(a for a in Attacken if a.__name__ == attacke.__class__.__name__)
+                    self.game_manager.selected_pokemon.attacken[0] = selected_attack()
+                    self.manager.change_screen(ViewPhysicalAttack(self.manager, self.game_manager))
+
+        self.back_button.handle_event(event)
+
+    def draw(self, surface):
+        for btn in self.view_attacken_button_list:
+            btn[1].draw(surface)
+
+        self.back_button.draw(surface)
+
+    def back(self):
+        self.game_manager.altar.trainer_bodies += self.game_manager.altar.change_attack_cost
+        self.manager.change_screen(ChangePhysicalAttack(self.manager, self.game_manager))
 
 
 class ViewSpecialAttack(Screen):
     def __init__(self, manager, game_manager):
-            super().__init__(manager, game_manager)
+        super().__init__(manager, game_manager)
+
+        self.title = Widgets.Label(str(game_manager.selected_pokemon.attacken[1].__class__.__name__), 
+                                            (manager.window_width // 2, manager.window_height * 0.2), 60, manager.WHITE)
+        
+        self.damage_label = Widgets.Label(f"Schaden: {game_manager.selected_pokemon.attacken[1].atkdmg}", 
+                                            (manager.window_width * 0.50, manager.window_height * 0.37), 60)
+        self.type_label = Widgets.Label(f"Typ: {game_manager.selected_pokemon.attacken[1].typ}", 
+                                        (manager.window_width * 0.50, manager.window_height * 0.42), 60)
+        self.attack_type_label = Widgets.Label(f"Attackentyp: {game_manager.selected_pokemon.attacken[1].dmgtype}", 
+                                                (manager.window_width * 0.50, manager.window_height * 0.47), 60)
+        self.change_cost_label = Widgets.Label(f"Kosten: {game_manager.altar.change_attack_cost} Besiegte Trainer", 
+                                                (manager.window_width * 0.50, manager.window_height * 0.60), 60)
+        self.change_attack_button = Widgets.Button("Wechseln", (manager.window_width * 0.42, manager.window_height * 0.65, 
+                                                                manager.window_width * 0.16, manager.window_height * 0.04))
+        self.change_attack_button.set_action(self.change_attack)
+
+        self.back_button = Widgets.Button("Zurück", (manager.window_width * 0.40, manager.window_height * 0.75, 
+                                                        manager.window_width * 0.20, manager.window_height * 0.06))
+        self.back_button.set_action(self.back)
     
     def handle_events(self, event):
-        pass
+        self.change_attack_button.handle_event(event)
+
+        self.back_button.handle_event(event)
 
     def draw(self, surface):
-        pass
+        self.title.draw(surface)
+
+        pygame.draw.rect(surface, self.manager.WHITE, (self.manager.window_width * 0.33, self.manager.window_height * 0.29, 
+                                                        self.manager.window_width * 0.34, self.manager.window_height * 0.45))
+        pygame.draw.rect(surface, self.manager.GRAY, (self.manager.window_width * 0.33, self.manager.window_height * 0.29, 
+                                                        self.manager.window_width * 0.34, self.manager.window_height * 0.45),
+                                                        width=3)
+        self.damage_label.draw(surface)
+        self.type_label.draw(surface)
+        self.attack_type_label.draw(surface)
+        self.change_cost_label.draw(surface)
+        self.change_attack_button.draw(surface)
+
+        self.back_button.draw(surface)
+
+    def change_attack(self):
+        self.game_manager.altar.trainer_bodies -= self.game_manager.altar.change_attack_cost
+        self.manager.change_screen(ChangeSpecialAttack(self.manager, self.game_manager))
+
+    def back(self):
+        self.manager.change_screen(PokemonStats(self.manager, self.game_manager))
+
+
+class ChangeSpecialAttack(Screen):
+    def __init__(self, manager, game_manager):
+        super().__init__(manager, game_manager)
+
+        self.title = Widgets.Label("Neue Attacke wählen", (manager.window_width // 2, manager.window_height * 0.2), 60, manager.WHITE)
+        
+        alle_attacken = [cls() for cls in Attacken]
+        
+        gefilterte_attacken = []
+        for attacke in alle_attacken:
+            if (getattr(attacke, "dmgtype") == "spezial"
+            and getattr(attacke, "typ") in game_manager.selected_pokemon.typ
+            and attacke.__class__.__name__ != game_manager.selected_pokemon.attacken[1].__class__.__name__):
+                gefilterte_attacken.append(attacke)
+
+        attackenliste = [attacke for attacke in gefilterte_attacken]
+
+        self.view_attacken_button_list = []
+
+        width_adder = 0.10
+        height_adder = 0.30
+        line_count = 0
+        for attacke in attackenliste:
+            if line_count == 4:
+                line_count = 0
+                height_adder += 0.08
+                width_adder = 0.10
+            btn = Widgets.Button(
+                attacke.__class__.__name__,
+                (manager.window_width * width_adder,
+                manager.window_height * height_adder,
+                manager.window_width * 0.18,
+                manager.window_height * 0.06)
+            )
+            self.view_attacken_button_list.append((attacke, btn))
+            width_adder += 0.20
+            line_count += 1
+
+        self.back_button = Widgets.Button("Zurück", (manager.window_width * 0.40, manager.window_height * 0.85, 
+                                                        manager.window_width * 0.20,  manager.window_height * 0.06))
+        self.back_button.set_action(self.back)
+    
+    def handle_events(self, event):
+        mouse_pos = pygame.mouse.get_pos()
+        if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed() == (True, False, False):
+            for attacke, btn in self.view_attacken_button_list:
+                if btn.rect.collidepoint(mouse_pos):
+                    selected_attack = next(a for a in Attacken if a.__name__ == attacke.__class__.__name__)
+                    self.game_manager.selected_pokemon.attacken[1] = selected_attack()
+                    self.manager.change_screen(ViewSpecialAttack(self.manager, self.game_manager))
+
+        self.back_button.handle_event(event)
+
+    def draw(self, surface):
+        for btn in self.view_attacken_button_list:
+            btn[1].draw(surface)
+
+        self.back_button.draw(surface)
+
+    def back(self):
+        self.game_manager.altar.trainer_bodies += self.game_manager.altar.change_attack_cost
+        self.manager.change_screen(ChangeSpecialAttack(self.manager, self.game_manager))
 
 
 class Altar(Screen):
