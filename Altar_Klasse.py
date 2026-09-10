@@ -4,7 +4,7 @@ from Angriff_Klassen import Attacken
 
 
 class Altar_For_Sacrifices:
-    def __init__(self, spieler, pokemon_bodies, trainer_bodies, fp_amount, sacrifice_count=0):
+    def __init__(self, spieler, pokemon_bodies=0, trainer_bodies=0, fp_amount=0, sacrifice_count=0):
         self.spieler = spieler
         self.pokemon_bodies = pokemon_bodies
         self.trainer_bodies = trainer_bodies
@@ -32,7 +32,7 @@ class Altar_For_Sacrifices:
                     roll_new = False
             self.spieler.add_pokemon(new_pokemon(attacken=[zufalls_attacke(dmgtype="physisch", typ=getattr(new_pokemon(), "typ")[0]), zufalls_attacke(dmgtype="spezial", typ=getattr(new_pokemon(), "typ")[0])]))
 
-    def sacrifice_for_fp(self):
+    def sacrifice_for_zp(self):
         if self.pokemon_bodies >= self.sac_for_fp_cost:
             amount = self.pokemon_bodies // self.sac_for_fp_cost
             self.pokemon_bodies -= amount * self.sac_for_fp_cost

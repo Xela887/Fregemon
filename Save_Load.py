@@ -7,7 +7,7 @@ import os
 import json
 
 
-def save(name, pokemonliste, altar, pokemon_team):
+def save(name: str, pokemonliste: list, altar: Altar_For_Sacrifices, pokemon_team: list):
     if name == "":
         name = "fregen"
     dateiname = f"{name}.json"
@@ -71,7 +71,7 @@ def save(name, pokemonliste, altar, pokemon_team):
     except Exception as e:
         print(f"Fehler beim Speichern: {e}")
 
-def load(Attacken):
+def load(Attacken=Attacken):
     dateipfad = filedialog.askopenfilename(
         title="Datei auswählen",
         filetypes=(("JSON-Dateien", "*.json"), ("Alle Dateien", "*.*"))

@@ -68,7 +68,7 @@ class Button:
         self.action = action
 
     def handle_event(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed() == (True, False, False):
             if self.rect.collidepoint(event.pos):
 
                 if self.action and self.action_locked == False:
@@ -110,3 +110,101 @@ class Button:
             text_image,
             text_rect
         )
+
+
+class TextInput():
+    def __init__(self, rect, active_input=False):
+        self.rect = pygame.Rect(rect)
+        self.text = ""
+        self.active_input = active_input
+        self.font = pygame.font.SysFont(None, 60)
+
+    def handle_event(self, event):
+        mouse_pos = pygame.mouse.get_pos()
+        if self.rect.collidepoint(mouse_pos) and event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed() == (True, False, False):
+            if self.active_input:
+                self.active_input = False
+            else:
+                self.active_input = True
+
+        if event.type == pygame.KEYDOWN and self.active_input:
+            if event.key == pygame.K_BACKSPACE:
+                self.text = self.text[:-1]
+            else:
+                self.text += event.unicode
+
+    def draw(self, surface):
+        pygame.draw.rect(surface, (255, 255, 255), self.rect)
+        if self.active_input:
+            pygame.draw.rect(surface, (0, 192, 255), self.rect, 3)
+        else:
+            pygame.draw.rect(surface, (100, 100, 100), self.rect, 3)
+        name_surface = self.font.render(self.text, True, (0, 0, 0))
+        surface.blit(name_surface, (self.rect.x + 10, self.rect.y + 10))
+
+
+class PokemonScrollBar:
+    def __init__(self, pokemonliste, size):
+        self.__pokemonliste = pokemonliste
+        self.__scrollbarliste = []
+        self.__size = size
+        self.__start_index = 0
+
+    def start(self):
+        self.__scrollbarliste = []
+        for i in range(self.__size):
+            try:
+                self.__scrollbarliste.append(self.__pokemonliste[i])
+            except IndexError:
+                break
+
+    def check_scrollable(self):
+        if len(self.__pokemonliste) > self.__size:
+            return True
+        else:
+            return False
+    
+    def __can_scroll_down(self):
+        return self.__start_index + 4 < len(self.__pokemonliste)
+
+    def scroll_down(self):
+        if self.check_scrollable() and self.__can_scroll_down():
+            self.__update_list_down()
+
+    def __update_list_down(self):
+        self.__start_index += 4
+        self.__scrollbarliste = []
+        for i in range(self.__size):
+            try:
+                self.__scrollbarliste.append(self.__pokemonliste[i + self.__start_index])
+            except IndexError:
+                break
+
+    def scroll_up(self):
+        if self.check_scrollable() and self.__start_index != 0:
+            self.__update_list_up()
+
+    def __update_list_up(self):
+        self.__start_index -= 4
+        self.__scrollbarliste = []
+        for i in range(self.__size):
+            try:
+                self.__scrollbarliste.append(self.__pokemonliste[i + self.__start_index])
+            except IndexError:
+                break
+    
+    def get_scrollbarliste(self):
+        return self.__scrollbarliste
+    
+    def draw_scrollbar_indicator_frame(self, surface, window_width, window_height):
+        rect = pygame.Rect(window_width * 0.89, window_height * 0.30, window_width * 0.01, window_height * 0.36)
+        pygame.draw.rect(surface, (255, 255, 255), rect)
+        pygame.draw.rect(surface, (100, 100, 100), rect, 3)
+
+    def draw_scrollbar_indicator(self, surface, window_width, window_height):
+        lines = ((len(self.__pokemonliste) - self.__size) // 4) + 5
+        spaces = (window_height * 0.36) / lines
+        indicator_position = spaces * (self.__start_index / 4)
+        rect = pygame.Rect(window_width * 0.89, window_height * 0.30 + indicator_position, window_width * 0.01, spaces)
+        pygame.draw.rect(surface, (100, 100, 100), rect)
+

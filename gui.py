@@ -557,7 +557,7 @@ class Gui:
                         elif sacrifice_for_pokemon_button.collidepoint(mouse_pos):
                             altar.sacrifice_for_pokemon()
                         elif sacrifice_for_fp_button.collidepoint(mouse_pos):
-                            altar.sacrifice_for_fp()
+                            altar.sacrifice_for_zp()
 
                 # Namen für neuen Spieler bestätigen
                 elif event.type == pygame.KEYDOWN and active_input:
@@ -1022,7 +1022,7 @@ class Gui:
                 available_pokemon_bodys_text = draw_text(f"Besiegte Pokemon:{altar.pokemon_bodies}", window_width * 0.50, window_height * 0.50, BLACK)
 
                 sacrifice_for_pokemon_button = draw_button("Opfern für Pokemon", window_width * 0.40, window_height * 0.57, window_width * 0.20, window_height * 0.06)
-                sacrifice_for_fp_button = draw_button("Opfern für FFP", window_width * 0.40, window_height * 0.65, window_width * 0.20, window_height * 0.06)
+                sacrifice_for_fp_button = draw_button("Opfern für ZP", window_width * 0.40, window_height * 0.65, window_width * 0.20, window_height * 0.06)
 
                 back_button = draw_button("Zurück", window_width * 0.40, window_height * 0.73, window_width * 0.20, window_height * 0.06)
 

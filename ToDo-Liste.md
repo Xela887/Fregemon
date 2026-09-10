@@ -1,3 +1,5 @@
 # ToDo-Liste:
 -Clean Code/Code sauber machen (pain)  
--Genaues balancing testen/anpassen/wiederholen
+-Typen passende Schriftfarbe geben  
+-Entwicklungen vervollständigen  
+-Genaues balancing testen/anpassen/wiederholen  
