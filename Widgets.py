@@ -3,7 +3,7 @@ import pygame
 
 class Label:
     def __init__(self, text, position, font_size=40, color=(0, 0, 0)):
-        self.text = text
+        self.text = str(text)
         self.position = position
         self.color = color
 

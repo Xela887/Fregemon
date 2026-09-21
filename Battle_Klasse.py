@@ -1,8 +1,10 @@
 import random
 import Effektivitaet
+from Pokemon_Klassen import Pokemon
+from Altar_Klasse import Altar_For_Sacrifices
 
 class Battle:
-    def __init__(self, spieler_active_poke, spieler_poke_team, spieler_selected_move, enemy_active_poke, enemy_poke_team, altar):
+    def __init__(self, spieler_active_poke: Pokemon, spieler_poke_team: list, spieler_selected_move, enemy_active_poke: Pokemon, enemy_poke_team: list, altar: Altar_For_Sacrifices):
         self.spieler_active_poke = spieler_active_poke
         self.spieler_poke_team = spieler_poke_team
         self.spieler_selected_move = spieler_selected_move
