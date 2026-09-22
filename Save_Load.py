@@ -42,7 +42,7 @@ def save(name: str, pokemonliste: list, altar: Altar_For_Sacrifices, pokemon_tea
         "pokemon_bodies" : altar.pokemon_bodies,
         "trainer_bodies" : altar.trainer_bodies,
         "sacrifice_count" : altar.sacrifice_count,
-        "fp_amount" : altar.fp_amount
+        "fp_amount" : altar.zp_amount
     })
 
     for pokemon in pokemon_team:
