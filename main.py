@@ -1,4 +1,4 @@
-from new_gui import Gui
+from gui import Gui
 
 
 gui = Gui()
