@@ -14,6 +14,7 @@ class GameClass:
         self.altar = altar
         self.selected_pokemon: Pokemon = None    # for viewing pokemon stats
         self.evolution: Pokemon_Entwickeln.Evolution = Pokemon_Entwickeln.Evolution()
+        self.battle_log = None
 
     def choose_enemy(self):
         enemys = ["Team Fregen Rüpel", "Nick Fregen"]

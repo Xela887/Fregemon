@@ -401,41 +401,31 @@ class StartCombat(Screen):
         self.manager.change_screen(MainMenu(self.manager, self.game_manager))
 
 
-class CombatMenu(Screen):
-    def __init__(self, manager, game_manager):
+class CombatScreen(Screen):
+    def __init__(self, manager: Gui, game_manager: GameClass):
         super().__init__(manager, game_manager)
 
         self.front_img = self.load_front_img()
         self.back_img = self.load_back_img()
-
-        self.attack_button = Widgets.Button("Angreifen", (manager.window_width * 0.50, manager.window_height * 0.80, 
-                                                          manager.window_width * 0.25, manager.window_height * 0.20))
-        self.attack_button.set_action(self.choose_attack)
-        self.swap_pokemon_button = Widgets.Button("Pokemon", (manager.window_width * 0.75, manager.window_height * 0.80, 
-                                                              manager.window_width * 0.25, manager.window_height * 0.20))
-        self.swap_pokemon_button.set_action(self.swap_pokemon)
-
-        self.choose_action_label = Widgets.Label("Was willst du machen?", (manager.window_width * 0.25, manager.window_height * 0.90), 60)
-
+        
         self.player_poke_name_label = Widgets.Label(self.game_manager.battle.spieler_active_poke.name, 
-                                                   (manager.window_width * 0.85, manager.window_height * 0.625), 60)
+                                                    (manager.window_width * 0.85, manager.window_height * 0.625), 60)
         self.player_poke_level_label = Widgets.Label(f"Level:{self.game_manager.battle.spieler_active_poke.level}", 
                                                     (manager.window_width * 0.75, manager.window_height * 0.700), 60)
-        self.player_poke_hp_label = Widgets.Label(f"HP:{self.game_manager.battle.spieler_active_poke.currentkp}",
-                                                 (manager.window_width * 0.90, manager.window_height * 0.675), 60)
-        self.player_poke_ep_label = Widgets.Label(f"EP:{self.game_manager.battle.spieler_active_poke.ep}",
-                                                 (manager.window_width * 0.90, manager.window_height * 0.725), 60)
+        self.player_poke_hp_label = Widgets.Label(f"HP:{round(self.game_manager.battle.spieler_active_poke.currentkp, 2)}",
+                                                    (manager.window_width * 0.90, manager.window_height * 0.675), 60)
+        self.player_poke_ep_label = Widgets.Label(f"EP:{round(self.game_manager.battle.spieler_active_poke.ep, 2)}",
+                                                    (manager.window_width * 0.90, manager.window_height * 0.725), 60)
 
         self.enemy_poke_name_label = Widgets.Label(self.game_manager.battle.enemy_active_poke.name, 
-                                                  (manager.window_width * 0.15, manager.window_height * 0.075), 60)
+                                                    (manager.window_width * 0.15, manager.window_height * 0.075), 60)
         self.enemy_poke_level_label = Widgets.Label(f"Level:{self.game_manager.battle.enemy_active_poke.level}",
-                                                   (manager.window_width * 0.05, manager.window_height * 0.150), 60)
-        self.enemy_poke_hp_label = Widgets.Label(f"HP:{self.game_manager.battle.enemy_active_poke.currentkp}",
+                                                    (manager.window_width * 0.05, manager.window_height * 0.150), 60)
+        self.enemy_poke_hp_label = Widgets.Label(f"HP:{round(self.game_manager.battle.enemy_active_poke.currentkp, 2)}",
                                                 (manager.window_width * 0.20, manager.window_height * 0.150), 60)
 
     def handle_events(self, event):
-        self.attack_button.handle_event(event)
-        self.swap_pokemon_button.handle_event(event)
+        pass
 
     def draw(self, surface):
         if self.front_img != None:
@@ -445,12 +435,20 @@ class CombatMenu(Screen):
             surface.blit(self.back_img, (self.manager.window_width * 0.10, self.manager.window_height * 0.55))
 
         pygame.draw.rect(surface, self.manager.WHITE, 
+                        (self.manager.window_width * 0.00, self.manager.window_height * 0.80, 
+                            self.manager.window_width * 0.50, self.manager.window_height * 0.20))
+        pygame.draw.rect(surface, self.manager.GRAY, 
+                        (self.manager.window_width * 0.00, self.manager.window_height * 0.80, 
+                            self.manager.window_width * 0.50, self.manager.window_height * 0.20),
+                            width=3)
+
+        pygame.draw.rect(surface, self.manager.WHITE, 
                         (self.manager.window_width * 0.70, self.manager.window_height * 0.60, 
-                         self.manager.window_width * 0.30, self.manager.window_height * 0.15))
+                            self.manager.window_width * 0.30, self.manager.window_height * 0.15))
         pygame.draw.rect(surface, self.manager.GRAY, 
                         (self.manager.window_width * 0.70, self.manager.window_height * 0.60, 
-                         self.manager.window_width * 0.30, self.manager.window_height * 0.15),
-                         width=3)
+                            self.manager.window_width * 0.30, self.manager.window_height * 0.15),
+                            width=3)
 
         self.player_poke_name_label.draw(surface)
         self.player_poke_level_label.draw(surface)
@@ -459,27 +457,15 @@ class CombatMenu(Screen):
 
         pygame.draw.rect(surface, self.manager.WHITE, 
                         (self.manager.window_width * 0.00, self.manager.window_height * 0.05, 
-                         self.manager.window_width * 0.30, self.manager.window_height * 0.15))
+                            self.manager.window_width * 0.30, self.manager.window_height * 0.15))
         pygame.draw.rect(surface, self.manager.GRAY, 
                         (self.manager.window_width * 0.00, self.manager.window_height * 0.05, 
-                         self.manager.window_width * 0.30, self.manager.window_height * 0.15),
-                         width=3)
+                            self.manager.window_width * 0.30, self.manager.window_height * 0.15),
+                            width=3)
 
         self.enemy_poke_name_label.draw(surface)
         self.enemy_poke_level_label.draw(surface)
         self.enemy_poke_hp_label.draw(surface)
-
-        self.attack_button.draw(surface)
-        self.swap_pokemon_button.draw(surface)
-
-        pygame.draw.rect(surface, self.manager.WHITE, 
-                        (self.manager.window_width * 0.00, self.manager.window_height * 0.80, 
-                         self.manager.window_width * 0.50, self.manager.window_height * 0.20))
-        pygame.draw.rect(surface, self.manager.GRAY, 
-                        (self.manager.window_width * 0.00, self.manager.window_height * 0.80, 
-                         self.manager.window_width * 0.50, self.manager.window_height * 0.20),
-                         width=3)
-        self.choose_action_label.draw(surface)
 
     def load_front_img(self):
         img = self.game_manager.battle.enemy_active_poke.front_img
@@ -499,6 +485,31 @@ class CombatMenu(Screen):
         back_img = pygame.transform.scale(back_img, (self.manager.window_width * 0.2, self.manager.window_height * 0.2))
         return back_img
 
+
+class CombatMenu(CombatScreen):
+    def __init__(self, manager, game_manager):
+        super().__init__(manager, game_manager)
+
+        self.choose_action_label = Widgets.Label("Was willst du machen?", (manager.window_width * 0.25, manager.window_height * 0.90), 60)
+
+        self.attack_button = Widgets.Button("Angreifen", (manager.window_width * 0.50, manager.window_height * 0.80, 
+                                                          manager.window_width * 0.25, manager.window_height * 0.20))
+        self.attack_button.set_action(self.choose_attack)
+        self.swap_pokemon_button = Widgets.Button("Pokemon", (manager.window_width * 0.75, manager.window_height * 0.80, 
+                                                              manager.window_width * 0.25, manager.window_height * 0.20))
+        self.swap_pokemon_button.set_action(self.swap_pokemon)
+
+    def handle_events(self, event):
+        self.attack_button.handle_event(event)
+        self.swap_pokemon_button.handle_event(event)
+
+    def draw(self, surface):
+        super().draw(surface)
+
+        self.choose_action_label.draw(surface)
+        self.attack_button.draw(surface)
+        self.swap_pokemon_button.draw(surface)
+
     def choose_attack(self):
         self.manager.change_screen(CombatChooseAttack(self.manager, self.game_manager))
 
@@ -506,37 +517,182 @@ class CombatMenu(Screen):
         self.manager.change_screen(CombatSwapPokemon(self.manager, self.game_manager))
 
 
-class CombatChooseAttack(Screen):
+class CombatChooseAttack(CombatScreen):
     def __init__(self, manager, game_manager):
         super().__init__(manager, game_manager)
 
+        self.choose_attack_label = Widgets.Label("Welche Attacke?", (manager.window_width * 0.20, manager.window_height * 0.90), 60)
+
+        self.physical_attack_button = Widgets.Button("Physiche-Attacke", (manager.window_width * 0.50, manager.window_height * 0.80, 
+                                                                          manager.window_width * 0.25, manager.window_height * 0.20))
+        self.physical_attack_button.set_action(self.physical_attack)
+        self.special_attack_button = Widgets.Button("Spezial-Attacke", (manager.window_width * 0.75, manager.window_height * 0.80, 
+                                                                        manager.window_width * 0.25, manager.window_height * 0.20))
+        self.special_attack_button.set_action(self.special_attack)
+
+        self.back_button = Widgets.Button("Zurück", (manager.window_width * 0.40, manager.window_height * 0.80, 
+                                                     manager.window_width * 0.10, manager.window_height * 0.20))
+        self.back_button.set_action(self.back)
+
     def handle_events(self, event):
-        pass
+        self.physical_attack_button.handle_event(event)
+        self.special_attack_button.handle_event(event)
+
+        self.back_button.handle_event(event)
 
     def draw(self, surface):
-        pass
+        super().draw(surface)
+
+        self.choose_attack_label.draw(surface)
+
+        self.physical_attack_button.draw(surface)
+        self.special_attack_button.draw(surface)
+
+        self.back_button.draw(surface)
+
+    def physical_attack(self):
+        self.game_manager.battle_log = self.game_manager.battle.player_attack_physic()
+        if self.game_manager.battle_log == "game_over_player":
+            self.manager.change_screen(FightResults(self.manager, self.game_manager))
+            return
+        elif self.game_manager.battle_log == "game_over_enemy":
+            self.game_manager.altar.trainer_bodies += 1
+            self.manager.change_screen(FightResults(self.manager, self.game_manager))
+            return
+        self.manager.change_screen(CombatMenu(self.manager, self.game_manager))
+
+    def special_attack(self):
+        self.game_manager.battle_log = self.game_manager.battle.player_attack_special()
+        if self.game_manager.battle_log == "game_over_player":
+            self.manager.change_screen(FightResults(self.manager, self.game_manager))
+            return
+        elif self.game_manager.battle_log == "game_over_enemy":
+            self.game_manager.altar.trainer_bodies += 1
+            self.manager.change_screen(FightResults(self.manager, self.game_manager))
+            return
+        self.manager.change_screen(CombatMenu(self.manager, self.game_manager))
+
+    def back(self):
+        self.manager.change_screen(CombatMenu(self.manager, self.game_manager))
 
 
-class CombatSwapPokemon(Screen):
+class CombatSwapPokemon(CombatScreen):
     def __init__(self, manager, game_manager):
         super().__init__(manager, game_manager)
 
+        self.pokemon_swap_buttons = []
+        functions = [self.swap_pokemon_one,
+                     self.swap_pokemon_two,
+                     self.swap_pokemon_three,
+                     self.swap_pokemon_four,
+                     self.swap_pokemon_five]
+        button_widths = [0.50, 0.75, 0.50, 0.75, 0.75]
+        button_heights = [0.80, 0.80, 0.60, 0.60, 0.40]
+
+        for i in range(len(game_manager.battle.spieler_poke_team) - 1):
+            pokemon_swap_button = Widgets.Button(game_manager.battle.spieler_poke_team[i+1].name,
+                                                (manager.window_width * button_widths[i], manager.window_height * button_heights[i], 
+                                                 manager.window_width * 0.25, manager.window_height * 0.20))
+            pokemon_swap_button.set_action(functions[i])
+            self.pokemon_swap_buttons.append(pokemon_swap_button)
+
+        self.back_button = Widgets.Button("Zurück", (manager.window_width * 0.40, manager.window_height * 0.80, 
+                                                     manager.window_width * 0.10, manager.window_height * 0.20))
+        self.back_button.set_action(self.back)
+
     def handle_events(self, event):
-        pass
+        for button in self.pokemon_swap_buttons:
+            button.handle_event(event)
+
+        self.back_button.handle_event(event)
 
     def draw(self, surface):
-        pass
+        super().draw(surface)
+
+        for button in self.pokemon_swap_buttons:
+            button.draw(surface)
+
+        self.back_button.draw(surface)
+
+    def back(self):
+        self.manager.change_screen(CombatMenu(self.manager, self.game_manager))
+
+    def swap_pokemon_one(self):
+        if len(self.game_manager.battle.spieler_poke_team) > 1:
+            self.game_manager.battle.swap_pokemon_in_battle(1)
+            self.manager.change_screen(CombatMenu(self.manager, self.game_manager))
+
+    def swap_pokemon_two(self):
+        if len(self.game_manager.battle.spieler_poke_team) > 1:
+            self.game_manager.battle.swap_pokemon_in_battle(2)
+            self.manager.change_screen(CombatMenu(self.manager, self.game_manager))
+
+    def swap_pokemon_three(self):
+        if len(self.game_manager.battle.spieler_poke_team) > 1:
+            self.game_manager.battle.swap_pokemon_in_battle(3)
+            self.manager.change_screen(CombatMenu(self.manager, self.game_manager))
+
+    def swap_pokemon_four(self):
+        if len(self.game_manager.battle.spieler_poke_team) > 1:
+            self.game_manager.battle.swap_pokemon_in_battle(4)
+            self.manager.change_screen(CombatMenu(self.manager, self.game_manager))
+
+    def swap_pokemon_five(self):
+        if len(self.game_manager.battle.spieler_poke_team) > 1:
+            self.game_manager.battle.swap_pokemon_in_battle(5)
+            self.manager.change_screen(CombatMenu(self.manager, self.game_manager))
 
 
 class FightResults(Screen):
     def __init__(self, manager, game_manager):
         super().__init__(manager, game_manager)
 
+        self.title = Widgets.Label("Kampfübersicht", (manager.window_width // 2, manager.window_height * 0.2), 60, manager.WHITE)
+
+        if game_manager.battle_log == "game_over_player":
+            result_text = "Du hast verloren"
+        elif game_manager.battle_log == "game_over_enemy":
+            result_text = "Du hast gewonnen"
+
+        self.result_label = Widgets.Label(result_text, (manager.window_width * 0.50, manager.window_height * 0.35), 60)
+
+        self.eplog_labels = []
+        height_adder = 0.45
+        
+        for logs in game_manager.battle.eplog:
+            ep_text = ""
+            ep_text += logs[0]+": "
+            ep_text += "+"+str(logs[1])+" EP"
+            ep_text_pos_y = manager.window_height * height_adder
+            ep_log_label = Widgets.Label(ep_text, (manager.window_width * 0.50, ep_text_pos_y), 60)
+            self.eplog_labels.append(ep_log_label)
+            height_adder += 0.05
+
+        self.back_button = Widgets.Button("Zurück", (manager.window_width * 0.40, manager.window_height * 0.70, 
+                                                     manager.window_width * 0.20, manager.window_height * 0.06))
+        self.back_button.set_action(self.back)
+
     def handle_events(self, event):
-        pass
+        self.back_button.handle_event(event)
 
     def draw(self, surface):
-        pass
+        pygame.draw.rect(surface, self.manager.WHITE, 
+                        (self.manager.window_width * 0.30, self.manager.window_height * 0.29, 
+                         self.manager.window_width * 0.40, self.manager.window_height * 0.50))
+        pygame.draw.rect(surface, self.manager.GRAY, 
+                        (self.manager.window_width * 0.30, self.manager.window_height * 0.29, 
+                         self.manager.window_width * 0.40, self.manager.window_height * 0.50),
+                         width=3)
+
+        self.result_label.draw(surface)
+
+        for label in self.eplog_labels:
+            label.draw(surface)
+
+        self.back_button.draw(surface)
+
+    def back(self):
+        self.manager.change_screen(MainMenu(self.manager, self.game_manager))
 
 
 class PokemonOverview(Screen):
@@ -550,6 +706,7 @@ class PokemonOverview(Screen):
 
         self.team_editor_button = Widgets.Button("Team-Editor", (manager.window_width * 0.40, manager.window_height * 0.78, 
                                                                  manager.window_width * 0.20, manager.window_height * 0.06))
+        self.team_editor_button.set_action(self.team_editor)
 
         self.back_button = Widgets.Button("Zurück", (manager.window_width * 0.40, manager.window_height * 0.85, 
                                                      manager.window_width * 0.20, manager.window_height * 0.06))
@@ -604,8 +761,134 @@ class PokemonOverview(Screen):
             self.view_pokemon_scrollbar.draw_scrollbar_indicator_frame(surface, self.manager.window_width, self.manager.window_height)
             self.view_pokemon_scrollbar.draw_scrollbar_indicator(surface, self.manager.window_width, self.manager.window_height)
 
+    def team_editor(self):
+        self.manager.change_screen(TeamEditor(self.manager, self.game_manager))
+
     def back(self):
         self.manager.change_screen(MainMenu(self.manager, self.game_manager))
+
+
+class TeamEditor(Screen):
+    def __init__(self, manager, game_manager):
+        super().__init__(manager, game_manager)
+
+        self.title = Widgets.Label("Team-Editor", (manager.window_width // 2, manager.window_height * 0.2), 60, manager.WHITE)
+
+        self.team_editor_scrollbar = Widgets.PokemonScrollBar(self.game_manager.spieler.pokemonliste, 16)
+        self.team_editor_scrollbar.start()
+
+        self.first_slot = Widgets.TeamSlotBox(manager.window_width * 0.21, manager.window_height * 0.68, 
+                                         manager.window_height * 0.15, manager.window_height * 0.15)
+        self.second_slot = Widgets.TeamSlotBox(manager.window_width * 0.31, manager.window_height * 0.68, 
+                                          manager.window_height * 0.15, manager.window_height * 0.15)
+        self.third_slot = Widgets.TeamSlotBox(manager.window_width * 0.41, manager.window_height * 0.68, 
+                                         manager.window_height * 0.15, manager.window_height * 0.15)
+        self.fourth_slot = Widgets.TeamSlotBox(manager.window_width * 0.51, manager.window_height * 0.68, 
+                                          manager.window_height * 0.15, manager.window_height * 0.15)
+        self.fifth_slot = Widgets.TeamSlotBox(manager.window_width * 0.61, manager.window_height * 0.68, 
+                                         manager.window_height * 0.15, manager.window_height * 0.15)
+        self.sixth_slot = Widgets.TeamSlotBox(manager.window_width * 0.71, manager.window_height * 0.68, 
+                                         manager.window_height * 0.15, manager.window_height * 0.15)
+
+        self.slots = [
+            self.first_slot,
+            self.second_slot,
+            self.third_slot,
+            self.fourth_slot,
+            self.fifth_slot,
+            self.sixth_slot
+        ]
+
+        self.box_team_number = {
+            self.first_slot : 0,
+            self.second_slot : 1,
+            self.third_slot : 2,
+            self.fourth_slot : 3,
+            self.fifth_slot : 4,
+            self.sixth_slot : 5
+        }
+
+        self.blue_box = self.first_slot
+        self.blue_box.set_color(manager.BLUE)
+
+        self.back_button = Widgets.Button("Zurück", (manager.window_width * 0.40, manager.window_height * 0.85, 
+                                                     manager.window_width * 0.20, manager.window_height * 0.06))
+        self.back_button.set_action(self.back)
+
+    def handle_events(self, event):
+        mouse_pos = pygame.mouse.get_pos()
+        if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed() == (True, False, False):
+            for poke_name, btn in self.choose_pokemon_button_list:
+                if btn.rect.collidepoint(mouse_pos):
+                    self.selected_pokemon = next(p for p in self.game_manager.spieler.pokemonliste if p.name == poke_name)
+                    pokemon_added = False
+                    if not self.selected_pokemon in self.game_manager.spieler.pokemon_team:
+                        try:
+                            self.game_manager.spieler.pokemon_team[self.box_team_number[self.blue_box]] = self.selected_pokemon
+                            pokemon_added = True
+                        except IndexError:
+                            self.game_manager.spieler.pokemon_team.append(self.selected_pokemon)
+                            pokemon_added = True
+                    try:
+                        if self.selected_pokemon == self.game_manager.spieler.pokemon_team[self.box_team_number[self.blue_box]] and pokemon_added == False:
+                            self.game_manager.spieler.pokemon_team.remove(self.selected_pokemon)
+                            self.blue_box.text = ""
+                    except IndexError:
+                        pass
+
+            for slot in self.slots:
+                if slot.box.collidepoint(mouse_pos):
+                    self.blue_box.set_color(self.manager.BLACK)
+                    slot.set_color(self.manager.BLUE)
+                    self.blue_box = slot
+                    break
+
+        if event.type == pygame.MOUSEWHEEL:
+            if event.y > 0:
+                self.team_editor_scrollbar.scroll_up()
+            elif event.y < 0:
+                self.team_editor_scrollbar.scroll_down()
+
+        self.back_button.handle_event(event)
+
+    def draw(self, surface):
+        self.title.draw(surface)
+
+        pokemonliste = [str(poke.name) for poke in self.team_editor_scrollbar.get_scrollbarliste()]
+        
+        self.choose_pokemon_button_list = []
+
+        width_adder = 0.10
+        height_adder = 0.30
+        line_count = 0
+        for poke in pokemonliste:
+            if line_count == 4:
+                line_count = 0
+                height_adder += 0.10
+                width_adder = 0.10
+            btn = Widgets.Button(poke, (self.manager.window_width * width_adder, self.manager.window_height * height_adder, 
+                                        self.manager.window_width * 0.18, self.manager.window_height * 0.06))
+            self.choose_pokemon_button_list.append((poke, btn))
+            width_adder += 0.20
+            line_count += 1
+
+        for btn in self.choose_pokemon_button_list:
+            btn[1].draw(surface)
+
+        for i in range(len(self.game_manager.spieler.pokemon_team)):
+            self.slots[i].text = self.game_manager.spieler.pokemon_team[i].name
+
+        for slot in self.slots:
+            slot.draw(surface)
+
+        if self.team_editor_scrollbar.check_scrollable():
+            self.team_editor_scrollbar.draw_scrollbar_indicator_frame(surface, self.manager.window_width, self.manager.window_height)
+            self.team_editor_scrollbar.draw_scrollbar_indicator(surface, self.manager.window_width, self.manager.window_height)
+
+        self.back_button.draw(surface)
+
+    def back(self):
+        self.manager.change_screen(PokemonOverview(self.manager, self.game_manager))
 
 
 class PokemonStats(Screen):
@@ -973,7 +1256,7 @@ class ChangePhysicalAttack(Screen):
 
     def back(self):
         self.game_manager.altar.trainer_bodies += self.game_manager.altar.change_attack_cost
-        self.manager.change_screen(ChangePhysicalAttack(self.manager, self.game_manager))
+        self.manager.change_screen(ViewPhysicalAttack(self.manager, self.game_manager))
 
 
 class ViewSpecialAttack(Screen):
@@ -1089,7 +1372,7 @@ class ChangeSpecialAttack(Screen):
 
     def back(self):
         self.game_manager.altar.trainer_bodies += self.game_manager.altar.change_attack_cost
-        self.manager.change_screen(ChangeSpecialAttack(self.manager, self.game_manager))
+        self.manager.change_screen(ViewSpecialAttack(self.manager, self.game_manager))
 
 
 class Altar(Screen):

@@ -208,3 +208,19 @@ class PokemonScrollBar:
         rect = pygame.Rect(window_width * 0.89, window_height * 0.30 + indicator_position, window_width * 0.01, spaces)
         pygame.draw.rect(surface, (100, 100, 100), rect)
 
+
+class TeamSlotBox:
+    def __init__(self, x, y, w, h):
+        self.__color = (0, 0, 0)
+        self.__rect = pygame.Rect(x, y, w, h)
+        self.text = ""
+
+    def set_color(self, new_color):
+        self.__color = new_color
+
+    def draw(self, surface: pygame.Surface):
+        self.box = pygame.draw.rect(surface, self.__color, self.__rect, 4)
+        self.__text_surf = pygame.font.SysFont(None, 40).render(self.text, True, (0, 0, 0))
+        self.__text_rect = self.__text_surf.get_rect(center=self.__rect.center)
+        surface.blit(self.__text_surf, self.__text_rect)
+
